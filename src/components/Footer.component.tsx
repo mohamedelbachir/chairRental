@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Group, Flex, Text, Anchor, Button, Menu } from "@mantine/core";
 import Logo from "./../assets/icons/LogoFooter.svg";
-import Playstore from "./../assets/icons/getOnPlayStore.svg";
+import Playstore from "./../assets/icons/getOnPlaystore.svg";
 import AppStore from "./../assets/icons/getOnAppStore.svg";
 import Chevron from "./../assets/icons/Chevron.svg";
 import FlagUSA from "./../assets/icons/flagen.svg";
