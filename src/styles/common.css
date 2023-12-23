@@ -1,0 +1,34 @@
+.inner {
+  max-width: var(--max-width-content);
+  height: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.brandLink {
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+
+.link-global {
+  text-decoration: none !important;
+  color: rgba(80, 80, 80, 1) !important;
+}
+
+.link-global:hover {
+  color: var(--primary-color) !important;
+}
+
+.p-link .active {
+  color: var(--primary-color) !important;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.b-button {
+  border: 1px solid var(--primary-color) !important;
+}

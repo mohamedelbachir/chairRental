@@ -1,0 +1,9 @@
+.containerFilter {
+  position: relative;
+  width: 30%;
+}
+
+.FilterElement {
+  display: flex;
+  flex-direction: column;
+}

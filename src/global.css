@@ -1,0 +1,72 @@
+:root {
+  --primary-color: #6a71f1;
+  --secondary-color: #000000;
+  --ternary-color: #f39090;
+  --link-color: #86a6bb;
+  --header-height: 99px;
+  --content-color: white;
+  --max-width-content: 1200px;
+  --min-padding-space: 10px;
+  --swiper-navigation-color: #fff;
+  --swiper-pagination-color: #fff;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter-VariableFont_slnt\,wght.ttf");
+}
+
+@font-face {
+  font-family: "Public";
+  src: url("./assets/fonts/PublicSans-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("./assets/fonts/Lato-Regular.ttf");
+}
+body {
+  background-color: #f7fafc;
+  font-family: "Lato", "Franklin Gothic Medium", "Arial Narrow", Arial,
+    sans-serif;
+
+  font-weight: lighter;
+  scroll-behavior: smooth;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+}
+
+input[type="date"] {
+  font-family: Lato, "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+input {
+  transition: none;
+  font-family: inherit;
+  &:focus-within {
+    outline: rem(1px) solid var(--primary-color) !important;
+    border-color: transparent;
+  }
+}
+.m-8fb7ebe7 {
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: inherit;
+  font-family: Lato, "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+button:active {
+  transform: none !important;
+}
+.brandLabel {
+  color: var(--primary-color);
+}
+
+.active {
+  color: var(--secondary-color);
+}
