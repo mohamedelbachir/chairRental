@@ -1,6 +1,6 @@
 import React from "react";
 import { Group, Anchor } from "@mantine/core";
-import classes from "./../styles/Footer.module.css";
+import classes from "./../styles/footer.module.css";
 //type Props = {};
 
 function SocialFooterLink() {
