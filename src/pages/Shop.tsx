@@ -11,7 +11,7 @@ import AssetII from "./../assets/products/1cff38a3fc45d6416700a92128145a0a7a02d7
 import AssetIII from "./../assets/products/260c7a4b2c0a4a3071479d3ea04dbef308c19301.png";
 import AssetIV from "./../assets/products/825df217dcf3ae6a903f7046fc417d331089432b.png";
 import AssetV from "./../assets/products/9d00665ee4b654e7de1ac596c31da4b9f1994793.png";
-import AssetVI from "./../assets/products/d5df9baf5b845d5b649289426578b53ebaef4c65.png";
+//import AssetVI from "./../assets/products/d5df9baf5b845d5b649289426578b53ebaef4c65.png";
 import AssetVII from "./../assets/products/ebb1aca726e944afe4e9b344a9d08d2cdf13f6ac.png";
 import AssetVIII from "./../assets/products/f16c3be367d46067797d63f72c5d238bab2c834f.png";
 
@@ -94,7 +94,7 @@ function Shop() {
   });
   return (
     <Group gap={10} align="flex-start" className="w-full" wrap="nowrap">
-      <FilterProductPanel datas={datas} />
+      <FilterProductPanel />
       <ShopList products={datas} />
     </Group>
   );

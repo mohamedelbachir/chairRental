@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Flex, Text, ActionIcon, Box } from "@mantine/core";
@@ -20,7 +21,7 @@ const DATA: testimonial[] = [
 //type Props = {};
 
 function Testimonial() {
-  const swiperRef = useRef(null);
+  const swiperRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const handlePrev = () => {
     if (swiperRef.current) {
@@ -32,8 +33,9 @@ function Testimonial() {
       swiperRef.current.swiper.slideNext();
     }
   };
-  const handleSlideChange = (swiper: Sp) => {
+  const handleSlideChange = (swiper: any) => {
     const currentSlideNumber = swiper.activeIndex + 1;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setActiveIndex((_) => {
       return currentSlideNumber;
     });

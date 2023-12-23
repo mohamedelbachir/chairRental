@@ -13,7 +13,7 @@ import {
   Input,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
-import { cardProductType } from "../utils/cardProductType";
+//import { cardProductType } from "../utils/cardProductType";
 import classes from "./../styles/filterProduct.module.css";
 import Chevron from "./../assets/icons/Chevron.svg";
 
@@ -156,10 +156,10 @@ export function FilterTown() {
   );
 }
 
-type Props = {
-  datas: cardProductType[];
-};
-function FilterProductPanel({ datas }: Props) {
+/* type Props = {
+  
+}; */
+function FilterProductPanel() {
   const [openedAccordion, setOpenendAccordion] = useState<string[]>([]);
   return (
     <Flex

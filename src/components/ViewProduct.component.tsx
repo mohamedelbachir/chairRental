@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import {
   Box,
   Flex,
@@ -51,12 +51,12 @@ export function PreviewImage({ data }: previewProps) {
   }, []);
 
   // Next/previous controls
-  function plusSlides(n: number) {
+  /* function plusSlides(n: number) {
     setSlideIndex((index) => {
       return index + n;
     });
     showSlides(slideIndex);
-  }
+  } */
 
   // Thumbnail image controls
   function currentSlide(n: number) {

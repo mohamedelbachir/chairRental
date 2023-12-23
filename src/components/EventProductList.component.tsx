@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Flex, Text, ActionIcon } from "@mantine/core";
@@ -9,7 +10,7 @@ import slide2 from "./../assets/slides/slide2.webp";
 import rightArrow from "./../assets/icons/Right.svg";
 
 import { EventCard } from "../utils/EventType";
-import { Swiper as Sp } from "swiper/types";
+
 const DATA: EventCard[] = [
   { src: slide1, title: "Tent for even" },
   { src: slide2, title: "Chair for wedding" },
@@ -26,7 +27,7 @@ export function EventProductCard({ src, title }: EventCard) {
 
 //type Props = {}
 export default function EvenProductList() {
-  const swiperRef = useRef(null);
+  const swiperRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(1);
   const handlePrev = () => {
     if (swiperRef.current) {
@@ -38,7 +39,7 @@ export default function EvenProductList() {
       swiperRef.current.swiper.slideNext();
     }
   };
-  const handleSlideChange = (swiper: Sp) => {
+  const handleSlideChange = (swiper: any) => {
     const currentSlideNumber = swiper.activeIndex + 1;
     setActiveIndex(() => {
       return currentSlideNumber;
