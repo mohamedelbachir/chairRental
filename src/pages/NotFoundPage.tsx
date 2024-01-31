@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import NotFoundIcon from "./../assets/icons/404.svg?react";
 import LeftArrow from "./../assets/icons/ArrowLeft.svg?react";
@@ -7,6 +7,12 @@ import { Center, Title, Stack, Group, Button } from "@mantine/core";
 //type Props = {};
 
 function NotFoundPage() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
   const navigate = useNavigate();
   return (
     <Center>
