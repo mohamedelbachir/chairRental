@@ -1,16 +1,19 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
 import { Group, Menu, Button } from "@mantine/core";
 import { ActionIcon } from "@mantine/core";
 import { Indicator } from "@mantine/core";
+import LangComboBox from "./LangComboBox.component";
 import classes from "./../styles/navbar.module.css";
+import classeHeader from "./../styles/header.module.css";
 
-import Profile from "./../assets/icons/Profile.svg";
-import Cart from "./../assets/icons/Cart.svg";
-import Chevron from "./../assets/icons/Chevron.svg";
-import CmFlag from "./../assets/icons/flagcm.svg";
-import MenuIcon from "./../assets/icons/menu.svg";
+import Profile from "./../assets/icons/Profile.svg?react";
+import Cart from "./../assets/icons/Cart.svg?react";
+import CmFlag from "./../assets/icons/flagcm.svg?react";
+import MenuIcon from "./../assets/icons/menu.svg?react";
 
 //type Props = {}
+
 function NavBar() {
   return (
     <nav className={classes.navbar}>
@@ -29,7 +32,7 @@ function NavBar() {
               size="compact-md"
               fw={"normal"}
               pl={0}
-              leftSection={<img src={MenuIcon} alt="menu" />}
+              leftSection={<MenuIcon />}
             >
               All category
             </Button>
@@ -50,95 +53,32 @@ function NavBar() {
         </Menu>
         <Group justify="space-between">
           <ActionIcon
-            component="a"
-            href="#"
+            component={Link}
+            to="#"
             size="xl"
             variant="transparent"
-            styles={{
-              root: {
-                transform: "none",
-              },
-            }}
             onClick={(event) => event.preventDefault()}
           >
-            <img src={Profile} alt="user" />
+            <Profile />
           </ActionIcon>
-          <Indicator processing color="red" size={15} offset={10} label="8">
+          <Indicator size={15} offset={10} label="8">
             <ActionIcon
-              component="a"
-              href="#"
+              component={Link}
+              to="#"
               size="xl"
               variant="transparent"
-              styles={{
-                root: {
-                  transform: "none",
-                },
-              }}
               onClick={(event) => event.preventDefault()}
             >
-              <img src={Cart} alt="card" />
+              <Cart />
             </ActionIcon>
           </Indicator>
-          <Menu
-            trigger="hover"
-            transitionProps={{ exitDuration: 0 }}
-            withinPortal
-            width={100}
-          >
-            <Menu.Target>
-              <a
-                href="/help"
-                className={classes.link}
-                onClick={(event) => event.preventDefault()}
-              >
-                <Group gap={"sm"}>
-                  <span className={classes.linkLabel}>Help</span>
-                  <img src={Chevron} alt="" />
-                </Group>
-              </a>
-            </Menu.Target>
-            {/* <Menu.Dropdown>
-              <a
-                href="#"
-                className={classes.link}
-                onClick={(event) => event.preventDefault()}
-              >
-                Help
-              </a>
-            </Menu.Dropdown> */}
-          </Menu>
-          <Menu
-            trigger="hover"
-            transitionProps={{ exitDuration: 0 }}
-            withinPortal
-            width={100}
-          >
-            <Menu.Target>
-              <a
-                href="/help"
-                className={classes.link}
-                onClick={(event) => event.preventDefault()}
-              >
-                <Group gap={"sm"}>
-                  <span className={classes.linkLabel}>English</span>
-                  <img src={Chevron} alt="" />
-                </Group>
-              </a>
-            </Menu.Target>
-
-            {/* <Menu.Dropdown>
-              <a
-                href="#"
-                className={classes.link}
-                onClick={(event) => event.preventDefault()}
-              >
-                Help
-              </a>
-            </Menu.Dropdown> */}
-          </Menu>
+          <NavLink to="/contact" className={classeHeader.linkHeader}>
+            <span className={classes.linkLabel}>Help</span>
+          </NavLink>
+          <LangComboBox />
           <Group>
             Ship to
-            <img src={CmFlag} alt="cmFlags" />
+            <CmFlag />
           </Group>
         </Group>
       </div>

@@ -3,7 +3,6 @@ import { Card, Image, Text, Group, Box, Flex } from "@mantine/core";
 import { cardProductType } from "../utils/cardProductType";
 import { Rating } from "@mantine/core";
 import { Link, useNavigate } from "react-router-dom";
-
 ///import classes from "./../styles/product-card.module.css";
 import { toogleViewType } from "./ShopList.component";
 
@@ -24,7 +23,7 @@ function ProductCard({ product, view }: Props) {
     <>
       {view == "grid" ? (
         <Card
-          w={260}
+          w={"32%"}
           withBorder
           component={Link}
           to={"/Shop/Detail/" + product.name}
@@ -36,7 +35,7 @@ function ProductCard({ product, view }: Props) {
           <Card.Section withBorder>
             <Image
               src={product.imgURLs[0]}
-              height={230}
+              height={180}
               alt={product.name}
               p={13}
               radius={20}
@@ -64,7 +63,7 @@ function ProductCard({ product, view }: Props) {
             <Image
               src={product.imgURLs[0]}
               w={210}
-              h={200}
+              h={180}
               alt={product.name}
               fit="contain"
               miw={210}
@@ -82,7 +81,7 @@ function ProductCard({ product, view }: Props) {
                   h={6}
                   style={{ backgroundColor: "#DEE2E7", borderRadius: "50%" }}
                 ></Box>
-                <Text c={"gray"}>{product.orderNumber} Orders</Text>
+                <Text c={"dark"}>{product.orderNumber} Orders</Text>
                 <Box
                   w={6}
                   h={6}

@@ -20,13 +20,10 @@ export default function ShopLayout() {
   }
   const links = items.map((item, index) => (
     <NavLink
-      //component={<NavLink to={} end/>}
       to={
         !items[index].title.includes("Detail") ? item?.href : location.pathname
       }
       key={index}
-      //size="xl"
-      //c={"gray"}
       className={"Link "}
       end
     >

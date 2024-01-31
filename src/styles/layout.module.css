@@ -2,4 +2,7 @@
   max-width: var(--max-width-content);
   min-height: 100vh;
   margin: auto;
+  @media only screen and (max-width: 1200px) {
+    padding: 0 var(--min-padding-space);
+  }
 }

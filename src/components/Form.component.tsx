@@ -1,6 +1,6 @@
 import React from "react";
 import { TextInput, Button, Box, Text, NumberInput } from "@mantine/core";
-import calendar from "./../assets/icons/calendar.svg";
+import Calendar from "./../assets/icons/calendar.svg?react";
 //type Props = {};
 
 function Form() {
@@ -39,7 +39,7 @@ function Form() {
           placeholder="ex: 01-03/01/2023"
           mt="7"
           size="sm"
-          rightSection={<img src={calendar} alt="calendar" />}
+          rightSection={<Calendar />}
           radius={"md"}
         />
         <TextInput
@@ -54,14 +54,8 @@ function Form() {
           type="submit"
           mx="auto"
           display={"block"}
-          styles={{
-            root: {
-              width: "187px",
-              textAlign: "center",
-            },
-          }}
-          color="var(--primary-color)"
-          fw={"normal"}
+          size="compact-lg"
+          px={"xl"}
           radius={"md"}
           mt="7"
           fz={"lg"}

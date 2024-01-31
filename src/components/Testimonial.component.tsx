@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Flex, Text, ActionIcon, Box } from "@mantine/core";
+import { Text, ActionIcon, Box } from "@mantine/core";
 
 import "swiper/css";
+import "swiper/css/effect-fade";
+//import { EffectFade, Autoplay } from "swiper/modules";
+
 import classes from "./../styles/eventcard.module.css";
 import user from "./../assets/users/customer call.webp";
-import rightArrow from "./../assets/icons/Right.svg";
+import RightArrow from "./../assets/icons/Right.svg?react";
 type testimonial = { src: string; msg: string };
 const DATA: testimonial[] = [
   {
@@ -15,14 +18,14 @@ const DATA: testimonial[] = [
   },
   {
     src: user,
-    msg: "Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le ",
+    msg: "Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer ",
   },
 ];
 //type Props = {};
 
 function Testimonial() {
   const swiperRef = useRef<any>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [, /*activeIndex*/ setActiveIndex] = useState(0);
   const handlePrev = () => {
     if (swiperRef.current) {
       swiperRef.current.swiper.slidePrev();
@@ -52,6 +55,7 @@ function Testimonial() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          overflow: "hidden",
         }}
       >
         <Swiper
@@ -60,13 +64,19 @@ function Testimonial() {
           slidesPerView={1}
           className={classes.sliderProfile}
           onSlideChange={handleSlideChange}
+          effect={"fade"}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          //modules={[EffectFade, Autoplay]}
         >
           {DATA.map((d, i) => (
             <SwiperSlide key={i}>
-              <Flex justify={"space-around"} align={"center"}>
+              <div className={classes.containSlide}>
                 <img src={d.src} alt={d.msg} className={classes.userProfile} />
                 <Text className={classes.msg}>{d.msg}</Text>
-              </Flex>
+              </div>
             </SwiperSlide>
           ))}
           <ActionIcon
@@ -74,32 +84,36 @@ function Testimonial() {
             size="xl"
             variant="white"
             radius={"xl"}
-            styles={{
-              root: {
+            styles={
+              {
+                /*root: {
                 transform: "none",
                 display: `${activeIndex === DATA.length - 1 ? "none" : ""}`,
-              },
-            }}
+              },*/
+              }
+            }
             className={classes.btr}
             onClick={() => handleNext()}
           >
-            <img src={rightArrow} alt="user" />
+            <RightArrow />
           </ActionIcon>
           <ActionIcon
             component="button"
             size="xl"
             variant="white"
             radius={"xl"}
-            styles={{
-              root: {
+            styles={
+              {
+                /*root: {
                 transform: "none",
                 display: `${activeIndex === 1 ? "none" : ""}`,
-              },
-            }}
+              },*/
+              }
+            }
             className={classes.btl}
             onClick={() => handlePrev()}
           >
-            <img src={rightArrow} alt="user" />
+            <RightArrow />
           </ActionIcon>
         </Swiper>
       </Box>

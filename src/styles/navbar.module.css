@@ -15,14 +15,20 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  @media only screen and (max-width: 1200px) {
+    padding: 0 var(--min-padding-space);
+  }
 }
 
 .defaultBtn {
   font-size: small;
 }
 
-.link {
-  text-decoration: none;
-  color: var(--secondary-color);
-  line-height: 22px;
+.chevronClass {
+  transition: transform 150ms ease;
+  transform: rotate(0deg);
+
+  [data-expanded] & {
+    transform: rotate(180deg);
+  }
 }

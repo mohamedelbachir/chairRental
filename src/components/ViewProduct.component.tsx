@@ -17,9 +17,9 @@ import {
 import PhoneImage from "./../assets/products/0fde3cb34a30e1c40080fa607437adb64caa3545.png";
 import AssetI from "./../assets/products/01ad73c0a2d288ce5bd52ddfac2945120df5102b.png";
 import AssetII from "./../assets/products/1cff38a3fc45d6416700a92128145a0a7a02d791.png";
-import shoppingIcon from "./../assets/icons/shopping_basket.svg";
-import cmflags from "./../assets/icons/flagcm.svg";
-import verifiedIcon from "./../assets/icons/verified_user.svg";
+import ShoppingIcon from "./../assets/icons/shopping_basket.svg?react";
+import Cmflag from "./../assets/icons/flagcm.svg?react";
+import VerifiedIcon from "./../assets/icons/verified_user.svg?react";
 //import AssetIII from "./../assets/products/260c7a4b2c0a4a3071479d3ea04dbef308c19301.png";
 //import AssetIV from "./../assets/products/825df217dcf3ae6a903f7046fc417d331089432b.png";
 
@@ -146,7 +146,7 @@ export function DetailProduct({ data }: PropsDetailsProduct) {
           h={6}
           style={{ backgroundColor: "#DEE2E7", borderRadius: "50%" }}
         ></Box>
-        <img src={shoppingIcon} alt="icon shop" />
+        <ShoppingIcon />
         <Text c={"gray"}>{data ? data.orderNumber : 134} Orders</Text>
       </Group>
       <Box p={20} bg={lighten("#FF9017", 0.7)}>
@@ -167,7 +167,9 @@ export function DetailProduct({ data }: PropsDetailsProduct) {
                 },
               }}
             >
-              <Table.Td c={"#8B96A5"}>{d.label} : </Table.Td>
+              <Table.Td c={"#8B96A5"} style={{ whiteSpace: "nowrap" }}>
+                {d.label} :{" "}
+              </Table.Td>
               <Table.Td c={"#505050"}>{d.value}</Table.Td>
             </Table.Tr>
           ))}
@@ -181,11 +183,11 @@ export function QuantityProduct() {
   return (
     <Flex direction={"column"} gap={5} style={boxStyle} w={"30%"}>
       <Group>
-        <img src={cmflags} alt="cm" />
+        <Cmflag />
         <Text c={"#8B96A5"}>Cameroon, Douala</Text>
       </Group>
       <Group>
-        <img src={verifiedIcon} alt="verified" />
+        <VerifiedIcon />
         <Text c={"#8B96A5"}>Cameroon shipping</Text>
       </Group>
       <Text>Quantity</Text>
@@ -241,14 +243,6 @@ export function QuantityProduct() {
         type="submit"
         w={"100%"}
         display={"block"}
-        styles={{
-          root: {
-            width: "187px",
-            textAlign: "center",
-          },
-        }}
-        color="var(--primary-color)"
-        fw={"normal"}
         radius={"lg"}
         mt="7"
         fz={"lg"}
@@ -277,17 +271,7 @@ export default function ViewProductComponent() {
       <Box w={"100%"} style={boxStyle}>
         <Tabs defaultValue="description">
           <Tabs.List>
-            <Tabs.Tab
-              value="description"
-              color="var(--primary-color)"
-              styles={{
-                tab: {
-                  color: "var(--primary-color)",
-                },
-              }}
-            >
-              Description
-            </Tabs.Tab>
+            <Tabs.Tab value="description">Description</Tabs.Tab>
           </Tabs.List>
           <Tabs.Panel value="description" pt="xs">
             {data ? (

@@ -1,20 +1,20 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Autocomplete, Group, Burger } from "@mantine/core";
+import { Autocomplete, Group, Burger, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "../styles/header.module.css";
-import Logo from "./../assets/icons/Logoheader.svg";
+import Logo from "./../assets/icons/Logoheader.svg?react";
 
 const links = [
-  { link: "/", label: "HOME" },
-  { link: "/Shop", label: "SHOP" },
-  { link: "/Contact", label: "CONTACT" },
+  { href: "/", label: "HOME" },
+  { href: "/Shop", label: "SHOP" },
+  { href: "/Contact", label: "CONTACT" },
 ];
 function Header() {
   const [opened, { toggle }] = useDisclosure(false);
 
   const items = links.map((link) => (
-    <NavLink key={link.label} to={link.link} className={classes.link}>
+    <NavLink key={link.label} to={link.href} className={classes.linkHeader}>
       {link.label}
     </NavLink>
   ));
@@ -26,24 +26,22 @@ function Header() {
           <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
           <Link to={"/"} className="brandLink">
             <Group gap={0}>
-              <img src={Logo} alt="brandLogo" />
-              <h1>
+              <Logo height={70} />
+              <Text fz={"1.7em"}>
                 <span className="brandLabel">ChairRental</span>
                 <i>Express</i>
-              </h1>
+              </Text>
             </Group>
           </Link>
         </Group>
-        <Group>
-          <Group ml={50} gap={40}>
-            {items}
-            <Autocomplete
-              className={classes.search}
-              placeholder="Search"
-              visibleFrom="xs"
-              radius={"xl"}
-            />
-          </Group>
+        <Group gap={40} wrap="nowrap">
+          {items}
+          <Autocomplete
+            className={classes.search}
+            placeholder="Search"
+            visibleFrom="xs"
+            radius={"xl"}
+          />
         </Group>
       </div>
     </header>

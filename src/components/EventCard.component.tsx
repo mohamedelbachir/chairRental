@@ -10,7 +10,7 @@ export type CardEventType = {
 
 function EventCard({ categorie, eventName, price, imgURL }: CardEventType) {
   return (
-    <Card w={347} withBorder>
+    <Card w={"32%"} withBorder>
       <Card.Section>
         <Image src={imgURL} height={208} alt={eventName} p={13} radius={20} />
       </Card.Section>

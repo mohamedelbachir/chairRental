@@ -19,11 +19,6 @@
   fill: var(--primary-color);
 }
 
-.Link {
-  text-decoration: none !important;
-  color: rgba(139, 150, 165, 1) !important;
-}
-
 .Link:hover {
   color: var(--primary-color) !important;
 }

@@ -2,13 +2,17 @@
   --primary-color: #6a71f1;
   --secondary-color: #000000;
   --ternary-color: #f39090;
-  --link-color: #86a6bb;
-  --header-height: 99px;
+  --link-color: darken(#8eb0c7, 0.3);
+  --header-height: 70px;
   --content-color: white;
+  --bg-color: #f7fafc;
   --max-width-content: 1200px;
   --min-padding-space: 10px;
   --swiper-navigation-color: #fff;
   --swiper-pagination-color: #fff;
+  --mantine-color-yellow-filled: var(--mantine-color-yellow-6) !important;
+  --mantine-color-gray-filled: var(--mantine-color-gray-6) !important;
+  --mantine-color-orange-filled: var(--mantine-color-orange-6) !important;
 }
 
 @font-face {
@@ -25,18 +29,48 @@
   font-family: "Lato";
   src: url("./assets/fonts/Lato-Regular.ttf");
 }
+
 body {
-  background-color: #f7fafc;
+  background-color: var(--bg-color);
   font-family: "Lato", "Franklin Gothic Medium", "Arial Narrow", Arial,
     sans-serif;
-
   font-weight: lighter;
   scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+.brandLink {
+  color: var(--secondary-color);
+}
+
+.brandLabel {
+  color: var(--primary-color);
+}
+
+.active-element {
+  transform: none;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   background: transparent;
 }
+
+.active {
+  color: var(--primary-color);
+}
+
+.logoAnimation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+}
+
+/*
+
 
 input[type="date"] {
   font-family: Lato, "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -61,12 +95,9 @@ input::placeholder {
 }
 
 button:active {
-  transform: none !important;
-}
-.brandLabel {
-  color: var(--primary-color);
+  
 }
 
-.active {
-  color: var(--secondary-color);
-}
+
+
+*/

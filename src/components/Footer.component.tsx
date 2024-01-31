@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Group, Flex, Text, Anchor, Button, Menu } from "@mantine/core";
-import Logo from "./../assets/icons/LogoFooter.svg";
-import Playstore from "./../assets/icons/getOnPlaystore.svg";
-import AppStore from "./../assets/icons/getOnAppStore.svg";
-import Chevron from "./../assets/icons/Chevron.svg";
-import FlagUSA from "./../assets/icons/flagen.svg";
+import { Group, Flex, Text, Anchor, Button } from "@mantine/core";
+import LangComboBox from "./LangComboBox.component";
 import classes from "./../styles/footer.module.css";
+import Logo from "./../assets/icons/LogoFooter.svg?react";
+import Playstore from "./../assets/icons/getOnPlaystore.svg?react";
+import AppStore from "./../assets/icons/getOnAppStore.svg?react";
 
 import SocialFooterLink from "./SocialFooterLink.component";
 //type Props = {};
@@ -20,38 +19,38 @@ export default function Footer() {
             <Flex direction={"column"} align={"flex-start"}>
               <Group gap={0}>
                 <Link to={"/"} className="brandLink">
-                  <img src={Logo} alt="brandLogo" />
+                  <Logo />
                 </Link>
-                <Text size="22px" fw={"bold"}>
+                <Text fz={"1.5em"}>
                   <span className="brandLabel">ChairRental</span>
                   <i>Express</i>
                 </Text>
               </Group>
-              <Text c={"gray"}>Follow us on our social pages vamvam</Text>
+              <Text c={"dark"}>Follow us on our social pages vamvam</Text>
               <SocialFooterLink />
             </Flex>
           </div>
           <Flex direction={"column"} gap={10}>
             <Text fw={"bold"}>About</Text>
-            <Anchor href="#" className={classes.Link}>
+            <Anchor component={Link} to="/Contact" className={classes.Link}>
               FAQ
             </Anchor>
-            <Anchor href="#" className={classes.Link}>
+            <Anchor component={Link} to="#" className={classes.Link}>
               Tems and Conditions
             </Anchor>
-            <Anchor href="#" className={classes.Link}>
+            <Anchor component={Link} to="#" className={classes.Link}>
               Privacy Policy
             </Anchor>
           </Flex>
           <Flex direction={"column"} gap={10}>
             <Text fw={"bold"}>Working Together</Text>
-            <Anchor href="#" className={classes.Link}>
+            <Anchor component={Link} to="#" className={classes.Link}>
               Create an Account
             </Anchor>
-            <Anchor href="#" className={classes.Link}>
+            <Anchor component={Link} to="#" className={classes.Link}>
               Become a Logistics Services Partner
             </Anchor>
-            <Anchor href="#" className={classes.Link}>
+            <Anchor component={Link} to="#" className={classes.Link}>
               Contact us
             </Anchor>
           </Flex>
@@ -59,11 +58,21 @@ export default function Footer() {
             <Text fw={"bold"} size="16px">
               Get app
             </Text>
-            <Button component="a" style={{ background: "black" }} href="#">
-              <img src={AppStore} alt="AppStore" />
+            <Button
+              component="a"
+              style={{ background: "black" }}
+              href="#"
+              target="_blank"
+            >
+              <AppStore />
             </Button>
-            <Button component="a" href="#" style={{ background: "black" }}>
-              <img src={Playstore} alt="Playstore" />
+            <Button
+              component="a"
+              href="#"
+              style={{ background: "black" }}
+              target="_blank"
+            >
+              <Playstore />
             </Button>
           </Flex>
         </div>
@@ -71,36 +80,9 @@ export default function Footer() {
       <div className="inner">
         <Group justify="space-between" style={{ width: "100%" }} mb={21}>
           <Text size="xl" className={classes.footerBottom}>
-            © 2023 Derico.{" "}
+            © 2023 Ecommerce.{" "}
           </Text>
-          <Menu
-            trigger="hover"
-            transitionProps={{ exitDuration: 0 }}
-            withinPortal
-            width={100}
-          >
-            <Menu.Target>
-              <Button
-                fw={"normal"}
-                size="compact-xl"
-                variant="transparent"
-                className={classes.footerBottom}
-                leftSection={<img src={FlagUSA} alt="usa flags" />}
-                rightSection={<img src={Chevron} alt="chevron" />}
-              >
-                English
-              </Button>
-            </Menu.Target>
-            {/* <Menu.Dropdown>
-              <a
-                href="#"
-                className={classes.link}
-                onClick={(event) => event.preventDefault()}
-              >
-                Help
-              </a>
-            </Menu.Dropdown> */}
-          </Menu>
+          <LangComboBox />
         </Group>
       </div>
     </>

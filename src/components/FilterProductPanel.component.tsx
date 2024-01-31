@@ -4,26 +4,22 @@ import {
   Accordion,
   Anchor,
   Text,
-  AccordionStylesNames,
   RangeSlider,
   Group,
   NumberInput,
-  Menu,
+  Combobox,
   Button,
   Input,
+  Stack,
+  useCombobox,
+  InputBase,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
+import "./../styles/shopLayout.css";
 //import { cardProductType } from "../utils/cardProductType";
-import classes from "./../styles/filterProduct.module.css";
-import Chevron from "./../assets/icons/Chevron.svg";
+import Chevron from "./../assets/icons/Chevron.svg?react";
 
 const categories: string[] = ["Chair", "Table", "Tent", "Modern Chair"];
-const panelStyles: Partial<Record<AccordionStylesNames, React.CSSProperties>> =
-  {
-    content: {
-      paddingLeft: 0,
-    },
-  };
 export function CategorieFilter() {
   return (
     <Accordion.Item
@@ -32,21 +28,22 @@ export function CategorieFilter() {
       pl={0}
     >
       <Accordion.Control pl={0}>
-        <Text fw={"bold"}>Categorie</Text>
+        <Text>Categorie</Text>
       </Accordion.Control>
-      <Accordion.Panel className="p-link" styles={panelStyles}>
+      <Accordion.Panel className="p-link">
         <Flex direction={"column"} gap={10}>
-          {categories.map((s) => (
-            <Anchor component={Link} to={"#"} p={0} className="link-global">
+          {categories.map((s, i) => (
+            <Anchor
+              component={Link}
+              to={"#"}
+              key={i}
+              p={0}
+              className={"catLink"}
+            >
               {s}
             </Anchor>
           ))}
-          <Anchor
-            component={Link}
-            to={"#"}
-            p={0}
-            className="link-global active"
-          >
+          <Anchor component={Link} to={"#"} p={0} className="active">
             See All
           </Anchor>
         </Flex>
@@ -59,19 +56,15 @@ export function FilterPrice() {
   return (
     <Accordion.Item value="FilterPrice">
       <Accordion.Control pl={0}>
-        <Text fw={"bold"}>Price Range</Text>
+        <Text>Price Range</Text>
       </Accordion.Control>
-      <Accordion.Panel p={0} className="p-link" styles={panelStyles}>
+      <Accordion.Panel className="p-link">
         <Flex direction={"column"} gap={10}>
           <RangeSlider
             styles={{
               thumb: { borderWidth: 1 },
-              track: {
-                backgroundColor: "red",
-              },
             }}
             thumbSize={20}
-            color="var(--primary-color)"
             minRange={0.2}
             min={0}
             max={10000}
@@ -97,9 +90,9 @@ export function FilterDistance() {
   return (
     <Accordion.Item value="FilterDistance">
       <Accordion.Control pl={0}>
-        <Text fw={"bold"}>Distance Range</Text>
+        <Text>Distance Range</Text>
       </Accordion.Control>
-      <Accordion.Panel p={0} className="p-link" styles={panelStyles}>
+      <Accordion.Panel className="p-link">
         <Flex direction={"column"} gap={10}>
           <Group gap={6}>
             <NumberInput w={"48%"} label="Min" placeholder="1" hideControls />
@@ -112,45 +105,50 @@ export function FilterDistance() {
 }
 
 export function FilterTown() {
+  const towns = ["Yaounde", "Douala", "Garoua"];
+  const combobox = useCombobox({
+    onDropdownClose: () => combobox.resetSelectedOption(),
+  });
+
+  const [value, setValue] = useState<string | null>(null);
+
+  const options = towns.map((item) => (
+    <Combobox.Option value={item} key={item}>
+      {item}
+    </Combobox.Option>
+  ));
   return (
     <Accordion.Item value="FilterTown">
       <Accordion.Control pl={0}>
-        <Text fw={"bold"}>Ville</Text>
+        <Text>Ville</Text>
       </Accordion.Control>
-      <Accordion.Panel
-        p={0}
-        className="p-link"
-        styles={{
-          content: {
-            paddingLeft: 0,
-          },
-        }}
-      >
-        <Menu
-          trigger="hover"
-          transitionProps={{ exitDuration: 0 }}
-          withinPortal
-          width={100}
+      <Accordion.Panel className="p-link">
+        <Combobox
+          store={combobox}
+          onOptionSubmit={(val) => {
+            setValue(val);
+            combobox.closeDropdown();
+          }}
         >
-          <Menu.Target>
-            <Input
+          <Combobox.Target>
+            <InputBase
               component="button"
+              type="button"
               pointer
-              rightSection={<img src={Chevron} alt="chevron" />}
+              rightSection={<Chevron />}
+              rightSectionPointerEvents="none"
+              onClick={() => combobox.toggleDropdown()}
             >
-              Button input
-            </Input>
-          </Menu.Target>
-          {/* <Menu.Dropdown>
-              <a
-                href="#"
-                className={classes.link}
-                onClick={(event) => event.preventDefault()}
-              >
-                Help
-              </a>
-            </Menu.Dropdown> */}
-        </Menu>
+              {value || (
+                <Input.Placeholder>Choix d'une ville</Input.Placeholder>
+              )}
+            </InputBase>
+          </Combobox.Target>
+
+          <Combobox.Dropdown>
+            <Combobox.Options>{options}</Combobox.Options>
+          </Combobox.Dropdown>
+        </Combobox>
       </Accordion.Panel>
     </Accordion.Item>
   );
@@ -165,9 +163,11 @@ function FilterProductPanel() {
     <Flex
       direction={"column"}
       justify={"flex-start"}
-      className={classes.containerFilter}
+      w={"25%"}
+      pos={"sticky"}
+      top={"calc(var(--header-height) + 55px)"}
     >
-      <div className={classes.FilterElement}>
+      <Stack>
         <Accordion
           multiple
           value={openedAccordion}
@@ -179,17 +179,15 @@ function FilterProductPanel() {
           <FilterTown />
         </Accordion>
         <Button
-          c={"var(--primary-color)"}
-          fw={"normal"}
-          variant="transparent"
-          className="b-button"
-          fz={"md"}
+          //fw={"normal"}
+          variant="light"
+          //className="b-button"
+          //fz={"md"}
           mt={10}
-          mr={15}
         >
           Apply
         </Button>
-      </div>
+      </Stack>
     </Flex>
   );
 }

@@ -1,50 +1,14 @@
 .eventImage {
-  max-width: 627px;
-  min-width: 473px;
-  height: 270px;
+  height: 100%;
+  width: auto;
+  max-height: 250px;
+  min-height: 250px;
   border-radius: 10px;
   object-fit: cover;
   border: 1px solid rgba(224, 224, 224, 1);
 }
-
-.sliderCtn,
-.sliderProfile {
-  user-select: none;
-  position: relative;
-}
-
 .sliderCtn {
-  height: fit-content;
-}
-
-.msg {
-  width: 50%;
-  text-align: center;
-  position: relative;
-}
-.msg::after,
-.msg::before {
-  position: absolute;
-  font-size: 9em;
-  line-height: 20px;
-  color: rgba(223, 224, 236, 1);
-  font-family: Public, "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-}
-
-.msg::after {
-  content: "”";
-  bottom: -130%;
-  right: 0;
-}
-
-.msg::before {
-  content: "“";
-  top: -40%;
-  left: 0;
-}
-.sliderProfile {
-  width: 90%;
+  height: 270px;
 }
 
 .btl,
@@ -62,13 +26,65 @@
 .btl {
   left: 1%;
 }
-.btl img {
+.btl svg {
   transform: rotate(180deg);
 }
 
-.userProfile {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 50%;
+.sliderProfile {
+  width: 100%;
+  .userProfile {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .containSlide {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .msg {
+    width: 50%;
+    text-align: center;
+    position: relative;
+    &::after,
+    &::before {
+      position: absolute;
+      font-size: 9em;
+      line-height: 20px;
+      color: rgba(223, 224, 236, 1);
+      font-family: Public, "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    }
+    &::after {
+      content: "”";
+      bottom: -130%;
+      right: 0;
+    }
+    &::before {
+      content: "“";
+      top: -40%;
+      left: 0;
+    }
+  }
 }
+
+/*
+.sliderCtn,
+.sliderProfile {
+  user-select: none;
+  position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+*/

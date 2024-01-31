@@ -93,7 +93,7 @@ function Shop() {
     });
   });
   return (
-    <Group gap={10} align="flex-start" className="w-full" wrap="nowrap">
+    <Group gap={10} align="start" className="w-full" wrap="nowrap">
       <FilterProductPanel />
       <ShopList products={datas} />
     </Group>

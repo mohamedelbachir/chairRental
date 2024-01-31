@@ -1,10 +1,10 @@
 import React from "react";
-import { Flex, Card, Text, ActionIcon, Group } from "@mantine/core";
+import { Flex, Card, Text, ActionIcon, Group, Stack } from "@mantine/core";
+import { Pagination } from "@mantine/core";
 import { cardProductType } from "../utils/cardProductType";
 import { useToggle } from "@mantine/hooks";
-import classes from "./../styles/shopList.module.css";
-import gridIcon from "../assets/icons/gridIcon.svg";
-import listIcon from "../assets/icons/listview.svg";
+import GridIcon from "../assets/icons/gridIcon.svg?react";
+import ListIcon from "../assets/icons/listview.svg?react";
 import ProductCard from "./ProductCard.component";
 type Props = {
   products: cardProductType[];
@@ -19,7 +19,7 @@ export default function ShopList({ products }: Props) {
     }
   }
   return (
-    <div className={classes.productWrapper}>
+    <Stack w={"75%"}>
       <Card withBorder h={68} style={{ width: "100%" }} mb={21}>
         <Group justify="space-between">
           <Text>
@@ -32,7 +32,7 @@ export default function ShopList({ products }: Props) {
               aria-label="grid"
               onClick={() => handleSwitch("grid")}
             >
-              <img src={gridIcon} alt="icon" />
+              <GridIcon />
             </ActionIcon>
 
             <ActionIcon
@@ -41,7 +41,7 @@ export default function ShopList({ products }: Props) {
               aria-label="list"
               onClick={() => handleSwitch("list")}
             >
-              <img src={listIcon} alt="icon" />
+              <ListIcon />
             </ActionIcon>
           </ActionIcon.Group>
         </Group>
@@ -49,12 +49,15 @@ export default function ShopList({ products }: Props) {
       <Flex
         justify={"space-between"}
         wrap={"wrap"}
-        gap={view === "grid" ? 20 : 9}
+        gap={view === "grid" ? 10 : 9}
       >
         {products.map((d, i) => {
           return <ProductCard key={i} product={d} view={view} />;
         })}
       </Flex>
-    </div>
+      <Group w={"100%"} justify="flex-end">
+        <Pagination total={10} />
+      </Group>
+    </Stack>
   );
 }
