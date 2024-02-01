@@ -5,10 +5,19 @@
   border-top: 1px solid rgba(224, 224, 224, 1);
   border-bottom: 1px solid rgba(224, 224, 224, 1);
   background-color: var(--content-color);
+  @media only screen and (max-width: 1200px) {
+    padding: 0 var(--min-padding-space);
+  }
+  @media only screen and (max-width: 670px) {
+    margin-top: 10px;
+  }
 }
 
 .footerContainer {
   padding: 20px 0 40px 0;
+  @media only screen and (max-width: 670px) {
+    padding: 10px 0 20px 0;
+  }
 }
 
 .socialLink {
@@ -24,5 +33,5 @@
 }
 
 .footerBottom {
-  color: rgba(96, 96, 96, 1) !important;
+  padding: 0 var(--min-padding-space);
 }

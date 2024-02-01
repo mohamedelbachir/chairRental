@@ -4,8 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Text, ActionIcon, Box } from "@mantine/core";
 
 import "swiper/css";
-import "swiper/css/effect-fade";
-//import { EffectFade, Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 
 import classes from "./../styles/eventcard.module.css";
 import user from "./../assets/users/customer call.webp";
@@ -46,18 +45,7 @@ function Testimonial() {
 
   return (
     <>
-      <Box
-        style={{
-          backgroundColor: "var(--content-color)",
-          border: "1.5px solid rgba(224, 224, 224, 1)",
-          width: `100%`,
-          height: "445px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          overflow: "hidden",
-        }}
-      >
+      <Box className={classes.ctnSliderTestimonial}>
         <Swiper
           ref={swiperRef}
           spaceBetween={20}
@@ -69,7 +57,7 @@ function Testimonial() {
             delay: 2500,
             disableOnInteraction: false,
           }}
-          //modules={[EffectFade, Autoplay]}
+          modules={[Autoplay]}
         >
           {DATA.map((d, i) => (
             <SwiperSlide key={i}>

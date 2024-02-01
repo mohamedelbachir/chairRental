@@ -1,23 +1,68 @@
-import React from "react";
-import { TextInput, Button, Box, Text, NumberInput } from "@mantine/core";
+import React, { useState } from "react";
+import {
+  TextInput,
+  Button,
+  Box,
+  Text,
+  NumberInput,
+  Stepper,
+  Group,
+} from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import Calendar from "./../assets/icons/calendar.svg?react";
+import classes from "./../styles/home.module.css";
 //type Props = {};
 
 function Form() {
+  const breakpoint = useMediaQuery("(max-width: 1000px)");
+  const secondbp = useMediaQuery("(max-width: 380px)");
+  const [active, setActive] = useState(0);
+  const nextStep = () =>
+    setActive((current) => {
+      //if (form.validate().hasErrors) {
+      //return current;
+      //}
+      return current < 1 ? current + 1 : current;
+    });
+
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current));
+
+  /*const form = useForm({
+    initialValues: {
+      username: '',
+      password: '',
+      name: '',
+      email: '',
+      website: '',
+      github: '',
+    },
+
+    validate: (values) => {
+      if (active === 0) {
+        return {
+          username:
+            values.username.trim().length < 6
+              ? 'Username must include at least 6 characters'
+              : null,
+          password:
+            values.password.length < 6 ? 'Password must include at least 6 characters' : null,
+        };
+      }
+
+      if (active === 1) {
+        return {
+          name: values.name.trim().length < 2 ? 'Name must include at least 2 characters' : null,
+          email: /^\S+@\S+$/.test(values.email) ? null : 'Invalid email',
+        };
+      }
+
+      return {};
+    },
+  });*/
   return (
-    <Box
-      w={445}
-      style={{
-        backgroundColor: "var(--content-color)",
-        padding: "30px",
-        borderRadius: "20px",
-        position: "sticky",
-        top: "calc(var(--header-height) + 65px)",
-        marginBottom: "10px",
-        userSelect: "none",
-      }}
-    >
-      <form>
+    <Box className={classes.box}>
+      <form style={{ display: breakpoint ? "none" : "block" }}>
         <Text fw={"bold"}>Quick Order</Text>
         <TextInput
           label="First which piece of furniture do you want today"
@@ -29,7 +74,7 @@ function Form() {
           label="what quantity"
           placeholder="ex: 200"
           hideControls
-          mt="7"
+          mt={"7"}
           size="sm"
           radius={"md"}
         />
@@ -63,8 +108,92 @@ function Form() {
           order
         </Button>
       </form>
+      <div style={{ display: breakpoint ? "block" : "none" }}>
+        <Stepper
+          active={active}
+          styles={{
+            steps: {
+              display: "none",
+            },
+            content: {
+              paddingTop: 0,
+            },
+          }}
+        >
+          <Stepper.Step>
+            <Text fw={"bold"} size={secondbp ? "xs" : "sm"}>
+              Quick Order
+            </Text>
+            <TextInput
+              label="First which piece of furniture do you want today"
+              placeholder="ex: I need chairs for a crusade"
+              size={secondbp ? "xs" : "sm"}
+              radius={"md"}
+            />
+            <NumberInput
+              label="what quantity"
+              placeholder="ex: 200"
+              hideControls
+              mt={secondbp ? "0" : "7"}
+              size={secondbp ? "xs" : "sm"}
+              radius={"md"}
+            />
+          </Stepper.Step>
+
+          <Stepper.Completed>
+            <TextInput
+              type="date"
+              label="For which period "
+              placeholder="ex: 01-03/01/2023"
+              mt={secondbp ? "0" : "7"}
+              size={secondbp ? "xs" : "sm"}
+              rightSection={<Calendar />}
+              radius={"md"}
+            />
+            <TextInput
+              type="tel"
+              label="Your Phone Number "
+              placeholder="ex: +237 697 00 00 00"
+              radius={"md"}
+              mt={secondbp ? "0" : "7"}
+              size={secondbp ? "xs" : "sm"}
+            />
+          </Stepper.Completed>
+
+          {/*<Stepper.Step label="Final step" description="Social media">
+            <TextInput
+              label="Website"
+              placeholder="Website"
+              //{...form.getInputProps("website")}
+            />
+            <TextInput
+              mt="md"
+              label="GitHub"
+              placeholder="GitHub"
+              //{...form.getInputProps('github')}
+            />
+        </Stepper.Step>
+          <Stepper.Completed>Completed! Form values</Stepper.Completed>*/}
+        </Stepper>
+        <Group justify="flex-end" mt="xs">
+          {active !== 0 && (
+            <Button
+              variant="default"
+              size={secondbp ? "xs" : "sm"}
+              onClick={prevStep}
+            >
+              Back
+            </Button>
+          )}
+          {active !== 1 && (
+            <Button size={secondbp ? "xs" : "sm"} onClick={nextStep}>
+              Next step
+            </Button>
+          )}
+          {active === 1 && <Button size={secondbp ? "xs" : "sm"}>Order</Button>}
+        </Group>
+      </div>
     </Box>
   );
 }
-
 export default Form;

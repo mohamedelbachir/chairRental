@@ -36,6 +36,7 @@ body {
     sans-serif;
   font-weight: lighter;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 a {

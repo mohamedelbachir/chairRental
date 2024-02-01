@@ -8,6 +8,25 @@
   @media only screen and (max-width: 1200px) {
     padding: 0 var(--min-padding-space);
   }
+  .navLinkMobile {
+    display: none;
+  }
+
+  .navDrawerMobile {
+    display: none;
+  }
+
+  @media only screen and (max-width: 880px) {
+    .navDesktop {
+      display: none;
+    }
+    .navDrawerMobile {
+      display: block;
+    }
+    .navLinkMobile {
+      display: block;
+    }
+  }
 }
 
 .search input {

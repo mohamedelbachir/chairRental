@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Anchor, Group, Flex } from "@mantine/core";
-import EventCard, { CardEventType } from "./EventCard.component";
+import EventCard, { CardEventType, EventCardBox } from "./EventCard.component";
 import "./../styles/eventCardList.css";
+import { useMediaQuery } from "@mantine/hooks";
 
 import { CategorieEvent } from "../utils/CategorieEventType";
 import EventImageI from "../assets/eventProducts/image 15.webp";
@@ -55,6 +56,8 @@ const datas: CardEventType[] = [
 
 //type Props = {}
 function EventCardList() {
+  const breakpoint = useMediaQuery("(max-width: 825px)");
+  const breakpointII = useMediaQuery("(max-width: 620px)");
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   //const [loading, setLoading] = useState(true);
@@ -98,42 +101,52 @@ function EventCardList() {
   }, [categorie, datas]);
   return (
     <>
-      <Group justify="center">
-        <Anchor
-          href="#all"
-          className={categorie == "all" ? "fselect" : "" + "filterLink"}
-          onClick={(e) => {
-            e.preventDefault();
-            setCategorie("all");
-          }}
-        >
-          All
-        </Anchor>
-        {categories.map((c) => (
-          <Anchor
-            href={"#" + c}
-            key={c}
-            className={categorie == c ? "fselect" : "" + "filterLink"}
-            onClick={(e) => {
-              e.preventDefault();
-              //@ts-expect-error not defined
-              setCategorie(c);
-            }}
+      {!breakpointII ? (
+        <>
+          <Group justify="center">
+            <Anchor
+              href="#all"
+              className={categorie == "all" ? "fselect" : "" + "filterLink"}
+              onClick={(e) => {
+                e.preventDefault();
+                setCategorie("all");
+              }}
+            >
+              All
+            </Anchor>
+            {categories.map((c) => (
+              <Anchor
+                href={"#" + c}
+                key={c}
+                className={categorie == c ? "fselect" : "" + "filterLink"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  //@ts-expect-error not defined
+                  setCategorie(c);
+                }}
+              >
+                {c}
+              </Anchor>
+            ))}
+          </Group>
+          <Flex
+            justify={eventCards.length !== 2 ? "space-between" : "flex-start"}
+            wrap={"wrap"}
+            gap={breakpoint ? 10 : 20}
+            mt={40}
           >
-            {c}
-          </Anchor>
-        ))}
-      </Group>
-      <Flex
-        justify={eventCards.length !== 2 ? "space-between" : "flex-start"}
-        wrap={"wrap"}
-        gap={20}
-        mt={40}
-      >
-        {eventCards.map((d, i) => {
-          return <EventCard key={i} {...d} />;
-        })}
-      </Flex>
+            {eventCards.map((d, i) => {
+              return <EventCard key={i} {...d} />;
+            })}
+          </Flex>
+        </>
+      ) : (
+        <>
+          {categories.map((c) => (
+            <EventCardBox categorie={c} datas={datas} key={c} />
+          ))}
+        </>
+      )}
     </>
   );
 }

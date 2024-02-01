@@ -2,16 +2,14 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Flex, Text, ActionIcon } from "@mantine/core";
-
+import { useMediaQuery } from "@mantine/hooks";
 import "swiper/css";
-import { Autoplay } from "swiper/modules";
 import classes from "./../styles/eventcard.module.css";
 import slide1 from "./../assets/slides/slide1.webp";
 import slide2 from "./../assets/slides/slide2.webp";
 import RightArrow from "./../assets/icons/Right.svg?react";
 
 import { EventCard } from "../utils/EventType";
-import "@splidejs/react-splide/css/core";
 const DATA: EventCard[] = [
   { src: slide1, title: "Tent for even" },
   { src: slide2, title: "Chair for wedding" },
@@ -46,12 +44,12 @@ export default function EvenProductList() {
       return currentSlideNumber;
     });
   };
-
+  const breakpoint = useMediaQuery("(max-width: 475px)");
   return (
     <>
       <Swiper
         ref={swiperRef}
-        spaceBetween={20}
+        spaceBetween={breakpoint ? 10 : 20}
         slidesPerView={2}
         className={classes.sliderCtn}
         onSlideChange={handleSlideChange}
@@ -60,7 +58,7 @@ export default function EvenProductList() {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        modules={[Autoplay]}
+        //modules={[Autoplay]}
       >
         {DATA.map((d, i) => (
           <SwiperSlide key={i}>
