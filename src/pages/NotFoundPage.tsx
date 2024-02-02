@@ -4,6 +4,7 @@ import NotFoundIcon from "./../assets/icons/404.svg?react";
 import LeftArrow from "./../assets/icons/ArrowLeft.svg?react";
 import HomeIcon from "./../assets/icons/House.svg?react";
 import { Center, Title, Stack, Group, Button } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 //type Props = {};
 
 function NotFoundPage() {
@@ -14,15 +15,20 @@ function NotFoundPage() {
     });
   });
   const navigate = useNavigate();
+  const breakpoint = useMediaQuery("(max-width:350px)");
   return (
     <Center>
-      <Stack>
+      <Stack mt={breakpoint ? "15dvh" : undefined}>
         <NotFoundIcon />
         <Center>
-          <Title>404, Page not found</Title>
+          <Title order={breakpoint ? 3 : undefined}>404, Page not found</Title>
         </Center>
         <Center>
-          <Group>
+          <Group
+            justify="center"
+            align="center"
+            gap={breakpoint ? 5 : undefined}
+          >
             <Button
               radius={"xl"}
               leftSection={<LeftArrow />}

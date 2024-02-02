@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import {
   Autocomplete,
   Group,
@@ -22,7 +22,13 @@ const links = [
 ];
 function Header() {
   const [opened, { toggle, close }] = useDisclosure(false);
+  const location = useLocation();
 
+  useEffect(() => {
+    if (opened) {
+      toggle();
+    }
+  }, [location.pathname]);
   const items = links.map((link) => (
     <NavLink key={link.label} to={link.href} className={classes.linkHeader}>
       {link.label}
@@ -30,6 +36,7 @@ function Header() {
   ));
   const breakpointI = useMediaQuery("(min-width: 515px)");
   const breakpointII = useMediaQuery("(max-width: 350px)");
+  const breakpointIII = useMediaQuery("(max-width: 320px)");
   return (
     <>
       <Drawer
@@ -37,7 +44,7 @@ function Header() {
         onClose={close}
         title={
           <Link to={"/"} className="brandLink">
-            <Group gap={0}>
+            <Group gap={5}>
               <Logo height={breakpointI ? 70 : 40} />
               <Text fz={breakpointI ? "1.7em" : "1.3em"}>
                 <span className="brandLabel">ChairRental</span>
@@ -59,7 +66,7 @@ function Header() {
       </Drawer>
       <header className={classes.header}>
         <div className="inner">
-          <Group gap={breakpointII ? 0 : undefined}>
+          <Group gap={breakpointII ? 0 : undefined} wrap="nowrap">
             <Burger
               opened={opened}
               onClick={toggle}
@@ -72,14 +79,18 @@ function Header() {
                   height={70}
                   style={{ display: breakpointI ? "block" : "none" }}
                 />
-                <Text fz={breakpointI ? "1.7em" : "1.3em"}>
+                <Text
+                  size={
+                    breakpointIII ? "1.1em" : breakpointI ? "1.7em" : "1.3em"
+                  }
+                >
                   <span className="brandLabel">ChairRental</span>
                   <i>Express</i>
                 </Text>
               </Group>
             </Link>
           </Group>
-          <Group className={classes.navLinkMobile} wrap="nowrap">
+          <Group className={classes.navLinkMobile} wrap="nowrap" gap={0}>
             <ActionIcon
               component={Link}
               to="#"

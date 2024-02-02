@@ -13,6 +13,10 @@
   --mantine-color-yellow-filled: var(--mantine-color-yellow-6) !important;
   --mantine-color-gray-filled: var(--mantine-color-gray-6) !important;
   --mantine-color-orange-filled: var(--mantine-color-orange-6) !important;
+  --mantine-color-green-filled: var(--mantine-color-green-6) !important;
+  @media only screen and (max-width: 350px) {
+    --header-height: 50px !important;
+  }
 }
 
 @font-face {

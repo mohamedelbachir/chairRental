@@ -1,105 +1,57 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Group, Menu, Button, Box } from "@mantine/core";
+import React, { useEffect, useState } from "react";
+import { Group, Box } from "@mantine/core";
 import { ActionIcon, Autocomplete } from "@mantine/core";
-import { Indicator } from "@mantine/core";
-import LangComboBox from "./LangComboBox.component";
-import classes from "./../styles/navbar.module.css";
-import classeHeader from "./../styles/header.module.css";
-
-import Profile from "./../assets/icons/Profile.svg?react";
-import Cart from "./../assets/icons/Cart.svg?react";
-import CmFlag from "./../assets/icons/flagcm.svg?react";
-import MenuIcon from "./../assets/icons/menu.svg?react";
 import SearchIcon from "./../assets/icons/search.svg?react";
+import FilterIcon from "./../assets/icons/filter-icon.svg?react";
+import { useMediaQuery } from "@mantine/hooks";
+import classes from "./../styles/navbar.module.css";
+import NavBarMenu from "./NavBarMenu.component";
+import { useLocation } from "react-router-dom";
 
 //type Props = {}
 
 function NavBar() {
+  const [canDisplay, setCanDisplay] = useState<
+    { link: string; name: string }[]
+  >([]);
+  const breakpoint = useMediaQuery("(max-width:400px)");
+  const location = useLocation();
+  const whiteListSearch = [
+    { link: "/", name: "home" },
+    { link: "/Shop", name: "shop" },
+  ];
+  useEffect(() => {
+    const L = whiteListSearch.filter((l) => {
+      return location.pathname === l.link;
+    });
+    setCanDisplay(L);
+  }, [location.pathname]);
   return (
-    <nav className={classes.navbar}>
-      <Box className={classes.navcontent} visibleFrom="xs">
-        <Menu
-          width={200}
-          position="bottom-start"
-          offset={15}
-          arrowPosition="center"
-        >
-          <Menu.Target>
-            <Button
-              variant="transparent"
-              color="var(--secondary-color)"
-              className="defaultBtn"
-              size="compact-md"
-              fw={"normal"}
-              pl={0}
-              leftSection={<MenuIcon />}
-            >
-              All category
-            </Button>
-          </Menu.Target>
-          {/* <Menu.Dropdown>
-            <Menu.Label>Application</Menu.Label>
-            <Menu.Item>Settings</Menu.Item>
-            <Menu.Item>Messages</Menu.Item>
-            <Menu.Item>Gallery</Menu.Item>
-            <Menu.Item>Search</Menu.Item>
-
-            <Menu.Divider />
-
-            <Menu.Label>Danger zone</Menu.Label>
-            <Menu.Item>Transfer my data</Menu.Item>
-            <Menu.Item color="red">Delete my account</Menu.Item>
-          </Menu.Dropdown> */}
-        </Menu>
-        <Group justify="space-between">
-          <ActionIcon
-            component={Link}
-            to="#"
-            size="xl"
-            variant="transparent"
-            className={classes.iconMobileHide}
-            onClick={(event) => event.preventDefault()}
+    <>
+      <NavBarMenu />
+      {canDisplay.length > 0 && (
+        <Box className={classes.navBarSearch}>
+          <Group
+            align="center"
+            h={"100%"}
+            w={"100%"}
+            hiddenFrom="xs"
+            gap={0}
+            justify="space-between"
           >
-            <Profile />
-          </ActionIcon>
-          <Indicator
-            size={15}
-            offset={10}
-            label="8"
-            className={classes.iconMobileHide}
-          >
-            <ActionIcon
-              component={Link}
-              to="#"
-              size="xl"
-              variant="transparent"
-              onClick={(event) => event.preventDefault()}
-            >
-              <Cart />
+            <Autocomplete
+              placeholder="Search"
+              radius={"xl"}
+              w={breakpoint ? "85%" : "90%"}
+              leftSection={<SearchIcon />}
+            />
+            <ActionIcon variant="default" radius={"lg"} size={"lg"}>
+              <FilterIcon fill="var(--primary-color)" />
             </ActionIcon>
-          </Indicator>
-          <NavLink to="/contact" className={classeHeader.linkHeader}>
-            <span className={classes.linkLabel}>Help</span>
-          </NavLink>
-          <LangComboBox />
-          <Group>
-            Ship to
-            <CmFlag />
           </Group>
-        </Group>
-      </Box>
-      <Group align="center" h={"100%"} w={"100%"}>
-        <Autocomplete
-          placeholder="Search"
-          hiddenFrom="xs"
-          radius={"xl"}
-          w={"100%"}
-          leftSection={<SearchIcon />}
-          p={"var(--min-padding-space)"}
-        />
-      </Group>
-    </nav>
+        </Box>
+      )}
+    </>
   );
 }
 

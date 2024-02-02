@@ -5,6 +5,7 @@
   position: sticky;
   top: 0;
   z-index: 5;
+  border-bottom: 1px solid #ededed;
   @media only screen and (max-width: 1200px) {
     padding: 0 var(--min-padding-space);
   }
@@ -24,7 +25,7 @@
       display: block;
     }
     .navLinkMobile {
-      display: block;
+      display: flex;
     }
   }
 }

@@ -9,11 +9,7 @@ function ProductInfo() {
       behavior: "smooth",
     });
   });
-  return (
-    <>
-      <ViewProductComponent />
-    </>
-  );
+  return <ViewProductComponent />;
 }
 
 export default ProductInfo;

@@ -1,4 +1,6 @@
-import React, { useState, useLayoutEffect } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState, useLayoutEffect, useRef, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Box,
   Flex,
@@ -13,6 +15,7 @@ import {
   Tabs,
   Button,
   NumberInput,
+  ActionIcon,
 } from "@mantine/core";
 import PhoneImage from "./../assets/products/0fde3cb34a30e1c40080fa607437adb64caa3545.png";
 import AssetI from "./../assets/products/01ad73c0a2d288ce5bd52ddfac2945120df5102b.png";
@@ -20,18 +23,21 @@ import AssetII from "./../assets/products/1cff38a3fc45d6416700a92128145a0a7a02d7
 import ShoppingIcon from "./../assets/icons/shopping_basket.svg?react";
 import Cmflag from "./../assets/icons/flagcm.svg?react";
 import VerifiedIcon from "./../assets/icons/verified_user.svg?react";
-//import AssetIII from "./../assets/products/260c7a4b2c0a4a3071479d3ea04dbef308c19301.png";
-//import AssetIV from "./../assets/products/825df217dcf3ae6a903f7046fc417d331089432b.png";
+import LeftArrow from "./../assets/icons/right-icon.svg?react";
+import RightArrow from "./../assets/icons/right-icon.svg?react";
 
 import classes from "./../styles/view-product.module.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { cardProductType } from "../utils/cardProductType";
+import { useMediaQuery } from "@mantine/hooks";
 //type Props = {};
+
+import "swiper/css";
 
 const boxStyle: MantineStyleProp = {
   backgroundColor: "white",
   border: "1px solid #DEE2E7",
-  padding: "20px",
+  padding: "10px",
   borderRadius: "6px",
 };
 
@@ -43,12 +49,39 @@ const boxInterStyle: MantineStyleProp = {
 type previewProps = {
   data: cardProductType | null;
 };
+
 export function PreviewImage({ data }: previewProps) {
+  const navigate = useNavigate();
   const imgURLs = data ? data.imgURLs : [PhoneImage, AssetI, AssetII];
   const [slideIndex, setSlideIndex] = useState(0);
+  const breakpoint = useMediaQuery("(max-width:950px)");
+  const breakpointII = useMediaQuery("(max-width:800px)");
+  const breakpointIII = useMediaQuery("(max-width:530px)");
+
   useLayoutEffect(() => {
     showSlides(slideIndex);
   }, []);
+
+  const swiperRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setActiveIndex] = useState(1);
+  const handlePrev = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slidePrev();
+    }
+  };
+  const handleNext = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
+  const handleSlideChange = (swiper: any) => {
+    const currentSlideNumber = swiper.activeIndex;
+    setSlideIndex(currentSlideNumber);
+    setActiveIndex(() => {
+      return currentSlideNumber;
+    });
+  };
 
   // Next/previous controls
   /* function plusSlides(n: number) {
@@ -71,45 +104,130 @@ export function PreviewImage({ data }: previewProps) {
     if (n < 0) {
       setSlideIndex(imgURLs.length - 1);
     }
+    if (swiperRef.current) {
+      //swiperRef.current.swiper.slideTo(2);
+    }
   }
+
+  useEffect(() => {
+    swiperRef.current.swiper.slideTo(slideIndex);
+  }, [slideIndex]);
+
   return (
     <>
-      <Flex direction={"column"} w={"40%"} gap={26}>
-        <Box h={380} w={"100%"} style={boxInterStyle}>
-          <Image
-            src={imgURLs[slideIndex]}
-            w={"100%"}
-            h={"100%"}
-            alt={"Image Preview"}
-            fit="contain"
-            miw={210}
-          />
+      <Flex
+        direction={"column"}
+        w={
+          breakpointIII
+            ? "100%"
+            : breakpointII
+            ? "65%"
+            : breakpoint
+            ? "30%"
+            : "35%"
+        }
+        gap={26}
+      >
+        <Box
+          h={breakpointIII ? 230 : 380}
+          w={"100%"}
+          style={breakpointIII ? undefined : boxInterStyle}
+        >
+          <Swiper
+            ref={swiperRef}
+            spaceBetween={0}
+            onSlideChange={handleSlideChange}
+            className={classes["product-preview-list"]}
+            //modules={[Autoplay]}
+          >
+            {imgURLs.map((d, i) => (
+              <SwiperSlide key={i}>
+                <Image
+                  src={d}
+                  w={"100%"}
+                  h={"100%"}
+                  alt={"Image Preview"}
+                  fit="contain"
+                  //mx={"auto"}
+                />
+              </SwiperSlide>
+            ))}
+            {breakpointIII && (
+              <>
+                <ActionIcon
+                  component="button"
+                  size="md"
+                  variant="white"
+                  radius={"lg"}
+                  className={classes.btnBack}
+                  onClick={() => navigate(-1)}
+                >
+                  <RightArrow width={13} />
+                </ActionIcon>
+                <ActionIcon.Group className={classes["btn-wrapper"]}>
+                  <ActionIcon
+                    component="button"
+                    size="md"
+                    variant="white"
+                    radius={"xl"}
+                    /*styles={{
+            root: {
+              display: `${activeIndex === DATA.length - 1 ? "none" : ""}`,
+            },
+          }}*/
+                    className={classes.btr}
+                    onClick={() => handlePrev()}
+                  >
+                    <RightArrow width={13} />
+                  </ActionIcon>
+                  <ActionIcon
+                    component="button"
+                    size="md"
+                    variant="white"
+                    radius={"xl"}
+                    /*styles={{
+            root: {
+              display: `${activeIndex === 1 ? "none" : ""}`,
+            },
+          }}*/
+                    className={classes.btl}
+                    onClick={() => handleNext()}
+                  >
+                    <LeftArrow width={13} />
+                  </ActionIcon>
+                </ActionIcon.Group>
+              </>
+            )}
+          </Swiper>
         </Box>
-        <Group align="center" justify="center" gap={9}>
-          {imgURLs.map((src, index) => (
-            <Box
-              h={47}
-              w={70.29}
-              style={{
-                ...boxInterStyle,
-                borderColor: `${
-                  slideIndex === index ? "var(--primary-color)" : "#DEE2E7"
-                }`,
-              }}
-              className={classes.thumb}
-              onClick={() => currentSlide(index)}
-              p={5}
-            >
-              <Image
-                src={src}
-                w={"100%"}
-                h={"100%"}
-                alt={"Image Preview"}
-                fit="contain"
-              />
-            </Box>
-          ))}
-        </Group>
+        {!breakpointIII && (
+          <Group align="center" justify="center" gap={9}>
+            {imgURLs.map((src, index) => (
+              <Box
+                h={47}
+                w={70.29}
+                style={{
+                  ...boxInterStyle,
+                  borderColor: `${
+                    slideIndex === index ? "var(--primary-color)" : "#DEE2E7"
+                  }`,
+                }}
+                className={classes.thumb}
+                onClick={() => currentSlide(index)}
+                p={5}
+                key={index}
+              >
+                <Image
+                  src={src}
+                  w={"100%"}
+                  h={"100%"}
+                  alt={"Image Preview"}
+                  fit="contain"
+                />
+              </Box>
+            ))}
+          </Group>
+        )}
       </Flex>
     </>
   );
@@ -118,6 +236,9 @@ type PropsDetailsProduct = {
   data: cardProductType | null;
 };
 export function DetailProduct({ data }: PropsDetailsProduct) {
+  const breakpoint = useMediaQuery("(max-width:800px)");
+  const breakpointII = useMediaQuery("(max-width:530px)");
+
   const dataTable = [
     { label: "Price", value: "Negotiable" },
     { label: "Type", value: "Classic shoe" },
@@ -132,8 +253,16 @@ export function DetailProduct({ data }: PropsDetailsProduct) {
     { label: "Warranty", value: "2 years full warranty " },
   ];
   return (
-    <Flex direction={"column"} gap={12}>
-      <Text fw={"bold"} size="1.3em">
+    <Flex
+      direction={"column"}
+      gap={12}
+      style={{
+        alignSelf: breakpoint ? "flex-end" : undefined,
+        order: breakpoint ? 3 : undefined,
+      }}
+      w={breakpointII ? "100%" : breakpoint ? "65%" : "35%"}
+    >
+      <Text fw={"bold"} size={breakpointII ? "md" : "1.3em"}>
         {data
           ? data.name
           : "Mens Long Sleeve T-shirt Cotton Base Layer Slim Muscle"}
@@ -149,13 +278,76 @@ export function DetailProduct({ data }: PropsDetailsProduct) {
         <ShoppingIcon />
         <Text c={"gray"}>{data ? data.orderNumber : 134} Orders</Text>
       </Group>
-      <Box p={20} bg={lighten("#FF9017", 0.7)}>
+      <Box p={breakpointII ? 10 : 20} bg={lighten("#FF9017", 0.7)}>
         <Center>
-          <Text fw={"bold"} size="1.3em" lts={2}>
+          <Text fw={"bold"} size={breakpointII ? "md" : "1.3em"} lts={1}>
             XAF {data ? data.price : 5000}/Jour
           </Text>
         </Center>
       </Box>
+      {breakpointII && (
+        <Flex direction={"column"} gap={5}>
+          <Text>Quantity</Text>
+          <Button.Group w={"100%"}>
+            <Button variant="default" w={"35%"}>
+              <Text size="lg" fw={"bold"}>
+                -
+              </Text>
+            </Button>
+            <NumberInput
+              defaultValue={1}
+              radius={"xs"}
+              hideControls
+              w={"30%"}
+              ta={"center"}
+              styles={{
+                input: {
+                  textAlign: "center",
+                },
+              }}
+            />
+            <Button variant="default" w={"35%"}>
+              <Text size="lg" fw={"bold"} c="var(--primary-color)">
+                +
+              </Text>
+            </Button>
+          </Button.Group>
+          <Text>Number of Days</Text>
+          <Button.Group w={"100%"}>
+            <Button variant="default" w={"35%"}>
+              <Text size="lg" fw={"bold"}>
+                -
+              </Text>
+            </Button>
+            <NumberInput
+              defaultValue={1}
+              radius={"xs"}
+              hideControls
+              w={"30%"}
+              styles={{
+                input: {
+                  textAlign: "center",
+                },
+              }}
+            />
+            <Button variant="default" w={"35%"}>
+              <Text size="lg" fw={"bold"} c="var(--primary-color)">
+                +
+              </Text>
+            </Button>
+          </Button.Group>
+          <Button
+            type="submit"
+            w={"100%"}
+            display={"block"}
+            radius={"lg"}
+            mt="7"
+            fz={"lg"}
+          >
+            Add to cart
+          </Button>
+        </Flex>
+      )}
       <Table>
         <Table.Tbody>
           {dataTable.map((d, i) => (
@@ -180,15 +372,33 @@ export function DetailProduct({ data }: PropsDetailsProduct) {
 }
 
 export function QuantityProduct() {
+  const breakpoint = useMediaQuery("(max-width:950px)");
+  const breakpointII = useMediaQuery("(max-width:800px)");
+  const breakpointIII = useMediaQuery("(max-width:575px)");
   return (
-    <Flex direction={"column"} gap={5} style={boxStyle} w={"30%"}>
-      <Group>
+    <Flex
+      direction={"column"}
+      gap={5}
+      style={boxStyle}
+      w={breakpointII ? "33.9%" : breakpoint ? "30%" : "25%"}
+      pos={"sticky"}
+      top={
+        breakpointIII
+          ? "calc(var(--header-height) + 5px)"
+          : "calc(var(--header-height) + 65px)"
+      }
+    >
+      <Group wrap="nowrap">
         <Cmflag />
-        <Text c={"#8B96A5"}>Cameroon, Douala</Text>
+        <Text c={"#8B96A5"} size={breakpointII ? "sm" : undefined}>
+          Cameroon, Douala
+        </Text>
       </Group>
-      <Group>
+      <Group wrap="nowrap">
         <VerifiedIcon />
-        <Text c={"#8B96A5"}>Cameroon shipping</Text>
+        <Text c={"#8B96A5"} size={breakpointII ? "sm" : undefined}>
+          Cameroon shipping
+        </Text>
       </Group>
       <Text>Quantity</Text>
       <Button.Group w={"100%"}>
@@ -257,34 +467,49 @@ export default function ViewProductComponent() {
   const { data }: { data: cardProductType | null } = location.state ?? {
     data: null,
   };
+  const breakpoint = useMediaQuery("(max-width:800px)");
+  const breakpointII = useMediaQuery("(max-width:530px)");
   return (
     <Flex
       direction={"column"}
       gap={20}
       className={classes.viewProductContainer}
     >
-      <Group style={boxStyle} align="flex-start" wrap="nowrap">
-        <PreviewImage data={data} />
-        <DetailProduct data={data} />
-        <QuantityProduct />
-      </Group>
-      <Box w={"100%"} style={boxStyle}>
-        <Tabs defaultValue="description">
-          <Tabs.List>
-            <Tabs.Tab value="description">Description</Tabs.Tab>
-          </Tabs.List>
-          <Tabs.Panel value="description" pt="xs">
-            {data ? (
-              <Text>{data.description}</Text>
-            ) : (
-              <Text>
-                {" "}
-                t nesciunt eaque sed ut. Natus suscipit consequuntur ea nisi.
-              </Text>
-            )}
-          </Tabs.Panel>
-        </Tabs>
-      </Box>
+      <div className={classes.wrapper + " container-with-padding "}>
+        {" "}
+        <Group
+          className={classes["wrap-info-product"]}
+          align="flex-start"
+          gap={breakpoint ? 5 : undefined}
+        >
+          <PreviewImage data={data} />
+          <DetailProduct data={data} />
+          {!breakpointII && <QuantityProduct />}
+        </Group>
+      </div>
+
+      <div className="container-with-padding ">
+        {!breakpointII && (
+          <Box w={"100%"} style={boxStyle}>
+            <Tabs defaultValue="description">
+              <Tabs.List>
+                <Tabs.Tab value="description">Description</Tabs.Tab>
+              </Tabs.List>
+              <Tabs.Panel value="description" pt="xs">
+                {data ? (
+                  <Text>{data.description}</Text>
+                ) : (
+                  <Text>
+                    {" "}
+                    t nesciunt eaque sed ut. Natus suscipit consequuntur ea
+                    nisi.
+                  </Text>
+                )}
+              </Tabs.Panel>
+            </Tabs>
+          </Box>
+        )}
+      </div>
     </Flex>
   );
 }

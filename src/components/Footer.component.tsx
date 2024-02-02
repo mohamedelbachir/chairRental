@@ -13,6 +13,8 @@ import SocialFooterLink from "./SocialFooterLink.component";
 
 export default function Footer() {
   const breakpoint = useMediaQuery("(min-width: 915px)");
+  const breakpointII = useMediaQuery("(max-width: 400px)");
+
   return (
     <>
       <footer className={classes.footer}>
@@ -20,9 +22,9 @@ export default function Footer() {
           <Group justify="space-between" w={"100%"}>
             <div className={classes.brand}>
               <Flex direction={"column"} align={"flex-start"}>
-                <Group gap={0}>
+                <Group gap={5}>
                   <Link to={"/"} className="brandLink">
-                    <Logo />
+                    <Logo width={breakpointII ? 40 : 70} />
                   </Link>
                   <Text fz={"1.5em"}>
                     <span className="brandLabel">ChairRental</span>
@@ -33,7 +35,7 @@ export default function Footer() {
                 <SocialFooterLink />
               </Flex>
             </div>
-            <Group justify="space-between" w={breakpoint ? "45%" : undefined}>
+            <Group justify="space-between" w={breakpoint ? "50%" : undefined}>
               <Flex direction={"column"} gap={10}>
                 <Text fw={"bold"}>About</Text>
                 <Anchor component={Link} to="/Contact" className={classes.Link}>
@@ -86,7 +88,7 @@ export default function Footer() {
       </footer>
       <div className={"inner " + classes.footerBottom}>
         <Group justify="space-between" style={{ width: "100%" }} mb={21}>
-          <Text size="lg" c={"gray"}>
+          <Text size={breakpointII ? "md" : "lg"} c={"gray"}>
             © 2023 Ecommerce.{" "}
           </Text>
           <LangComboBox />

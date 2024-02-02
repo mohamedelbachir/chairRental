@@ -7,7 +7,7 @@ import FrFlag from "./../assets/icons/flagfr.svg?react";
 //type Props = {}
 
 const data = [
-  { label: "English", image: <EnFlag /> },
+  { label: "English", image: <EnFlag width={24} height={17} /> },
   { label: "French", image: <FrFlag width={24} height={17} /> },
 ];
 

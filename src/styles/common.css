@@ -1,3 +1,14 @@
+.top-element {
+  @media screen and (max-width: 830px) {
+    margin-top: 5px;
+  }
+}
+.container-with-padding {
+  @media only screen and (max-width: 1200px) {
+    padding: 0 var(--min-padding-space);
+  }
+}
+
 .inner {
   max-width: var(--max-width-content);
   height: inherit;

@@ -14,6 +14,7 @@ import AssetV from "./../assets/products/9d00665ee4b654e7de1ac596c31da4b9f199479
 //import AssetVI from "./../assets/products/d5df9baf5b845d5b649289426578b53ebaef4c65.png";
 import AssetVII from "./../assets/products/ebb1aca726e944afe4e9b344a9d08d2cdf13f6ac.png";
 import AssetVIII from "./../assets/products/f16c3be367d46067797d63f72c5d238bab2c834f.png";
+import { useMediaQuery } from "@mantine/hooks";
 
 //type Props = {};
 const datas: cardProductType[] = [
@@ -92,10 +93,16 @@ function Shop() {
       behavior: "smooth",
     });
   });
+  const breakpoint = useMediaQuery("(max-width:830px");
   return (
-    <Group gap={10} align="start" className="w-full" wrap="nowrap">
-      <FilterProductPanel />
-      <ShopList products={datas} />
+    <Group
+      gap={10}
+      align="start"
+      className="w-full container-with-padding "
+      wrap="nowrap"
+    >
+      {!breakpoint && <FilterProductPanel />}
+      <ShopList breakpoint={breakpoint} products={datas} />
     </Group>
   );
 }

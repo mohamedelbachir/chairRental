@@ -21,7 +21,7 @@ function Home() {
     });
   });
   return (
-    <>
+    <div className="container-with-padding ">
       <section className={classes.hero}>
         <Form />
       </section>
@@ -50,7 +50,7 @@ function Home() {
         Our customers do the talking for us
       </Text>
       <Testimonial />
-    </>
+    </div>
   );
 }
 

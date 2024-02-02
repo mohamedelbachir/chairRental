@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { Breadcrumbs, Box } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import "./../styles/shopLayout.css";
 //type Props = {};
 
@@ -30,12 +31,15 @@ export default function ShopLayout() {
       {item?.title}
     </NavLink>
   ));
+  const breakpoint = useMediaQuery("(max-width:830px");
   return (
     <>
-      <Box>
-        <Breadcrumbs separator=">" my="20px" className="breakCumpLink">
-          {links}
-        </Breadcrumbs>
+      <Box className="container-with-padding">
+        {!breakpoint && (
+          <Breadcrumbs separator=">" my="20px" className="breakCumpLink">
+            {links}
+          </Breadcrumbs>
+        )}
       </Box>
       <Outlet />
     </>
