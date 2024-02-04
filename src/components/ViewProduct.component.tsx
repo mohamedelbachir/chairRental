@@ -54,8 +54,6 @@ export function PreviewImage({ data }: previewProps) {
   const navigate = useNavigate();
   const imgURLs = data ? data.imgURLs : [PhoneImage, AssetI, AssetII];
   const [slideIndex, setSlideIndex] = useState(0);
-  const breakpoint = useMediaQuery("(max-width:950px)");
-  const breakpointII = useMediaQuery("(max-width:800px)");
   const breakpointIII = useMediaQuery("(max-width:530px)");
 
   useLayoutEffect(() => {
@@ -82,15 +80,6 @@ export function PreviewImage({ data }: previewProps) {
       return currentSlideNumber;
     });
   };
-
-  // Next/previous controls
-  /* function plusSlides(n: number) {
-    setSlideIndex((index) => {
-      return index + n;
-    });
-    showSlides(slideIndex);
-  } */
-
   // Thumbnail image controls
   function currentSlide(n: number) {
     setSlideIndex(n);
@@ -116,16 +105,8 @@ export function PreviewImage({ data }: previewProps) {
   return (
     <>
       <Flex
+        className={classes["product-preview"]}
         direction={"column"}
-        w={
-          breakpointIII
-            ? "100%"
-            : breakpointII
-            ? "65%"
-            : breakpoint
-            ? "30%"
-            : "35%"
-        }
         gap={26}
       >
         <Box
@@ -143,6 +124,7 @@ export function PreviewImage({ data }: previewProps) {
             {imgURLs.map((d, i) => (
               <SwiperSlide key={i}>
                 <Image
+                  loading="lazy"
                   src={d}
                   w={"100%"}
                   h={"100%"}
@@ -200,34 +182,38 @@ export function PreviewImage({ data }: previewProps) {
             )}
           </Swiper>
         </Box>
-        {!breakpointIII && (
-          <Group align="center" justify="center" gap={9}>
-            {imgURLs.map((src, index) => (
-              <Box
-                h={47}
-                w={70.29}
-                style={{
-                  ...boxInterStyle,
-                  borderColor: `${
-                    slideIndex === index ? "var(--primary-color)" : "#DEE2E7"
-                  }`,
-                }}
-                className={classes.thumb}
-                onClick={() => currentSlide(index)}
-                p={5}
-                key={index}
-              >
-                <Image
-                  src={src}
-                  w={"100%"}
-                  h={"100%"}
-                  alt={"Image Preview"}
-                  fit="contain"
-                />
-              </Box>
-            ))}
-          </Group>
-        )}
+        <Group
+          align="center"
+          justify="center"
+          gap={9}
+          className={classes["thumbmails-ctn"]}
+        >
+          {imgURLs.map((src, index) => (
+            <Box
+              h={47}
+              w={70.29}
+              style={{
+                ...boxInterStyle,
+                borderColor: `${
+                  slideIndex === index ? "var(--primary-color)" : "#DEE2E7"
+                }`,
+              }}
+              className={classes.thumb}
+              onClick={() => currentSlide(index)}
+              p={5}
+              key={index}
+            >
+              <Image
+                loading="lazy"
+                src={src}
+                w={"100%"}
+                h={"100%"}
+                alt={"Image Preview"}
+                fit="contain"
+              />
+            </Box>
+          ))}
+        </Group>
       </Flex>
     </>
   );
@@ -236,8 +222,7 @@ type PropsDetailsProduct = {
   data: cardProductType | null;
 };
 export function DetailProduct({ data }: PropsDetailsProduct) {
-  const breakpoint = useMediaQuery("(max-width:800px)");
-  const breakpointII = useMediaQuery("(max-width:530px)");
+  const breakpoint = useMediaQuery("(max-width:530px)");
 
   const dataTable = [
     { label: "Price", value: "Negotiable" },
@@ -253,16 +238,8 @@ export function DetailProduct({ data }: PropsDetailsProduct) {
     { label: "Warranty", value: "2 years full warranty " },
   ];
   return (
-    <Flex
-      direction={"column"}
-      gap={12}
-      style={{
-        alignSelf: breakpoint ? "flex-end" : undefined,
-        order: breakpoint ? 3 : undefined,
-      }}
-      w={breakpointII ? "100%" : breakpoint ? "65%" : "35%"}
-    >
-      <Text fw={"bold"} size={breakpointII ? "md" : "1.3em"}>
+    <Flex direction={"column"} gap={12} className={classes["product-info"]}>
+      <Text fw={"bold"} size={breakpoint ? "md" : "1.3em"}>
         {data
           ? data.name
           : "Mens Long Sleeve T-shirt Cotton Base Layer Slim Muscle"}
@@ -278,75 +255,80 @@ export function DetailProduct({ data }: PropsDetailsProduct) {
         <ShoppingIcon />
         <Text c={"gray"}>{data ? data.orderNumber : 134} Orders</Text>
       </Group>
-      <Box p={breakpointII ? 10 : 20} bg={lighten("#FF9017", 0.7)}>
+      <Box p={breakpoint ? 10 : 20} bg={lighten("#FF9017", 0.7)}>
         <Center>
-          <Text fw={"bold"} size={breakpointII ? "md" : "1.3em"} lts={1}>
+          <Text fw={"bold"} size={breakpoint ? "md" : "1.3em"} lts={1}>
             XAF {data ? data.price : 5000}/Jour
           </Text>
         </Center>
       </Box>
-      {breakpointII && (
-        <Flex direction={"column"} gap={5}>
-          <Text>Quantity</Text>
-          <Button.Group w={"100%"}>
-            <Button variant="default" w={"35%"}>
-              <Text size="lg" fw={"bold"}>
-                -
-              </Text>
+      {breakpoint && (
+        <>
+          <Text size="sm" c={"gray"}>
+            {data?.description}
+          </Text>
+          <Flex direction={"column"} gap={5}>
+            <Text>Quantity</Text>
+            <Button.Group w={"100%"}>
+              <Button variant="default" w={"35%"}>
+                <Text size="lg" fw={"bold"}>
+                  -
+                </Text>
+              </Button>
+              <NumberInput
+                defaultValue={1}
+                radius={"xs"}
+                hideControls
+                w={"30%"}
+                ta={"center"}
+                styles={{
+                  input: {
+                    textAlign: "center",
+                  },
+                }}
+              />
+              <Button variant="default" w={"35%"}>
+                <Text size="lg" fw={"bold"} c="var(--primary-color)">
+                  +
+                </Text>
+              </Button>
+            </Button.Group>
+            <Text>Number of Days</Text>
+            <Button.Group w={"100%"}>
+              <Button variant="default" w={"35%"}>
+                <Text size="lg" fw={"bold"}>
+                  -
+                </Text>
+              </Button>
+              <NumberInput
+                defaultValue={1}
+                radius={"xs"}
+                hideControls
+                w={"30%"}
+                styles={{
+                  input: {
+                    textAlign: "center",
+                  },
+                }}
+              />
+              <Button variant="default" w={"35%"}>
+                <Text size="lg" fw={"bold"} c="var(--primary-color)">
+                  +
+                </Text>
+              </Button>
+            </Button.Group>
+            <Button
+              type="submit"
+              w={"100%"}
+              display={"block"}
+              radius={"lg"}
+              mt="7"
+              fz={"lg"}
+            >
+              Add to cart
             </Button>
-            <NumberInput
-              defaultValue={1}
-              radius={"xs"}
-              hideControls
-              w={"30%"}
-              ta={"center"}
-              styles={{
-                input: {
-                  textAlign: "center",
-                },
-              }}
-            />
-            <Button variant="default" w={"35%"}>
-              <Text size="lg" fw={"bold"} c="var(--primary-color)">
-                +
-              </Text>
-            </Button>
-          </Button.Group>
-          <Text>Number of Days</Text>
-          <Button.Group w={"100%"}>
-            <Button variant="default" w={"35%"}>
-              <Text size="lg" fw={"bold"}>
-                -
-              </Text>
-            </Button>
-            <NumberInput
-              defaultValue={1}
-              radius={"xs"}
-              hideControls
-              w={"30%"}
-              styles={{
-                input: {
-                  textAlign: "center",
-                },
-              }}
-            />
-            <Button variant="default" w={"35%"}>
-              <Text size="lg" fw={"bold"} c="var(--primary-color)">
-                +
-              </Text>
-            </Button>
-          </Button.Group>
-          <Button
-            type="submit"
-            w={"100%"}
-            display={"block"}
-            radius={"lg"}
-            mt="7"
-            fz={"lg"}
-          >
-            Add to cart
-          </Button>
-        </Flex>
+          </Flex>
+        </>
       )}
       <Table>
         <Table.Tbody>
@@ -372,31 +354,23 @@ export function DetailProduct({ data }: PropsDetailsProduct) {
 }
 
 export function QuantityProduct() {
-  const breakpoint = useMediaQuery("(max-width:950px)");
-  const breakpointII = useMediaQuery("(max-width:800px)");
-  const breakpointIII = useMediaQuery("(max-width:575px)");
+  const breakpoint = useMediaQuery("(max-width:800px)");
   return (
     <Flex
+      className={classes["product-quantity"]}
       direction={"column"}
       gap={5}
       style={boxStyle}
-      w={breakpointII ? "33.9%" : breakpoint ? "30%" : "25%"}
-      pos={"sticky"}
-      top={
-        breakpointIII
-          ? "calc(var(--header-height) + 5px)"
-          : "calc(var(--header-height) + 65px)"
-      }
     >
       <Group wrap="nowrap">
         <Cmflag />
-        <Text c={"#8B96A5"} size={breakpointII ? "sm" : undefined}>
+        <Text c={"#8B96A5"} size={breakpoint ? "sm" : undefined}>
           Cameroon, Douala
         </Text>
       </Group>
       <Group wrap="nowrap">
         <VerifiedIcon />
-        <Text c={"#8B96A5"} size={breakpointII ? "sm" : undefined}>
+        <Text c={"#8B96A5"} size={breakpoint ? "sm" : undefined}>
           Cameroon shipping
         </Text>
       </Group>
@@ -484,7 +458,7 @@ export default function ViewProductComponent() {
         >
           <PreviewImage data={data} />
           <DetailProduct data={data} />
-          {!breakpointII && <QuantityProduct />}
+          <QuantityProduct />
         </Group>
       </div>
 

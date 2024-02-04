@@ -1,14 +1,13 @@
-import React, { useEffect, lazy } from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { nprogress } from "@mantine/nprogress";
 import { useLocation } from "react-router-dom";
 
 //pages
-//import Home from "./pages/Home";
-const Home = lazy(() => import("./pages/Home"));
-const Shop = lazy(() => import("./pages/Shop"));
-const ProductInfo = lazy(() => import("./pages/ProductInfo"));
-const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+import Home from "./pages/Home";
+import Shop from "./pages/Shop";
+import ProductInfo from "./pages/ProductInfo";
+import NotFoundPage from "./pages/NotFoundPage";
 
 //Layout
 import Layout from "./layouts/Layout";

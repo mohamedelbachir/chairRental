@@ -4,6 +4,7 @@ import { cardProductType } from "../utils/cardProductType";
 import { useMediaQuery } from "@mantine/hooks";
 import { Rating } from "@mantine/core";
 import { Link, useNavigate } from "react-router-dom";
+import classes from "./../styles/product-card.module.css";
 ///import classes from "./../styles/product-card.module.css";
 import { toogleViewType } from "./ShopList.component";
 
@@ -13,17 +14,13 @@ type Props = {
 };
 
 function ProductCard({ product, view }: Props) {
-  const breakpoint = useMediaQuery("(max-width:830px");
-  const breakpointII = useMediaQuery("(max-width:615px");
-  const breakpointNote = useMediaQuery("(max-width:535px");
-  const breakpointIII = useMediaQuery("(max-width:450px");
-  const breakpointIV = useMediaQuery("(max-width:340px");
-  const breakpointV = useMediaQuery("(max-width:285px");
+  const breakpoint = useMediaQuery("(max-width:830px)");
+  const breakpointII = useMediaQuery("(max-width:615px)");
+  const breakpointIII = useMediaQuery("(max-width:450px)");
 
   const navigate = useNavigate();
   function handleClick(link: string, data: cardProductType) {
     navigate(link, {
-      replace: true,
       state: { data },
     });
   }
@@ -31,16 +28,7 @@ function ProductCard({ product, view }: Props) {
     <>
       {view == "grid" ? (
         <Card
-          p={breakpointIV ? 5 : undefined}
-          w={
-            breakpointV
-              ? "100%"
-              : breakpointII
-              ? breakpointIV
-                ? "49%"
-                : "48.5%"
-              : "32%"
-          }
+          className={classes["product-view-grid"]}
           withBorder
           component={Link}
           to={"/Shop/Detail/" + product.name}
@@ -51,6 +39,7 @@ function ProductCard({ product, view }: Props) {
         >
           <Card.Section withBorder>
             <Image
+              loading="lazy"
               src={product.imgURLs[0]}
               height={breakpoint ? 110 : 180}
               alt={product.name}
@@ -71,25 +60,18 @@ function ProductCard({ product, view }: Props) {
             >
               XAF {product.price}/JOUR
             </Text>
-            {!breakpointIII && (
-              <Group gap={breakpoint ? 5 : 10}>
-                <Rating
-                  value={product.star}
-                  fractions={2}
-                  readOnly
-                  size={"xs"}
-                />
-                <Text c={"orange"}>{product.star}</Text>
-                <Box
-                  w={6}
-                  h={6}
-                  style={{ backgroundColor: "#DEE2E7", borderRadius: "50%" }}
-                ></Box>
-                <Text c={"green"} style={{ whiteSpace: "nowrap" }}>
-                  {product.shop}
-                </Text>
-              </Group>
-            )}
+            <Group gap={breakpoint ? 5 : 10} className={classes["ctn-rating"]}>
+              <Rating value={product.star} fractions={2} readOnly size={"xs"} />
+              <Text c={"orange"}>{product.star}</Text>
+              <Box
+                w={6}
+                h={6}
+                style={{ backgroundColor: "#DEE2E7", borderRadius: "50%" }}
+              ></Box>
+              <Text c={"green"} style={{ whiteSpace: "nowrap" }}>
+                {product.shop}
+              </Text>
+            </Group>
             <Text c={"gray"} size={breakpointIII ? "sm" : undefined}>
               {product.name}
             </Text>
@@ -99,6 +81,7 @@ function ProductCard({ product, view }: Props) {
         <Card withBorder h={breakpoint ? undefined : 230} w={"100%"}>
           <Group justify="flex-start" align="flex-start" wrap="nowrap">
             <Image
+              loading="lazy"
               src={product.imgURLs[0]}
               w={breakpoint ? 100 : 150}
               height={"auto"}
@@ -117,35 +100,34 @@ function ProductCard({ product, view }: Props) {
               <Text size={breakpointIII ? "sm" : "md"} fw={"bold"}>
                 XAF {product.price}/JOUR
               </Text>
-              {!breakpointNote && (
-                <Group wrap="nowrap">
-                  <Rating value={product.star} fractions={2} readOnly />
-                  <Text c={"orange"}>{product.star}</Text>
-                  <Box
-                    w={6}
-                    h={6}
-                    style={{ backgroundColor: "#DEE2E7", borderRadius: "50%" }}
-                  ></Box>
-                  <Text c={"dark"}>{product.orderNumber} Orders</Text>
-                  <Box
-                    w={6}
-                    h={6}
-                    style={{ backgroundColor: "#DEE2E7", borderRadius: "50%" }}
-                  ></Box>
-                  <Text c={"green"}>{product.shop}</Text>
-                </Group>
-              )}
-              {!breakpointIII && (
-                <Text c={"gray"} lineClamp={breakpoint ? 1 : 2}>
-                  {product.description}
-                </Text>
-              )}
+              <Group wrap="nowrap" className={classes["ctn-rating-list"]}>
+                <Rating value={product.star} fractions={2} readOnly />
+                <Text c={"orange"}>{product.star}</Text>
+                <Box
+                  w={6}
+                  h={6}
+                  style={{ backgroundColor: "#DEE2E7", borderRadius: "50%" }}
+                ></Box>
+                <Text c={"dark"}>{product.orderNumber} Orders</Text>
+                <Box
+                  w={6}
+                  h={6}
+                  style={{ backgroundColor: "#DEE2E7", borderRadius: "50%" }}
+                ></Box>
+                <Text c={"green"}>{product.shop}</Text>
+              </Group>
+              <Text
+                c={"gray"}
+                lineClamp={breakpoint ? 1 : 2}
+                className={classes["t-card"]}
+              >
+                {product.description}
+              </Text>
               <Link
                 style={{ fontSize: 16, fontWeight: 500 }}
                 to={"/Shop/Detail/" + product.name}
                 className="Link active"
-                onClick={(e) => {
-                  e.preventDefault();
+                onClick={() => {
                   handleClick(`/Shop/Detail/${product.name}`, product);
                 }}
               >

@@ -42,11 +42,12 @@ function Header() {
       <Drawer
         opened={opened}
         onClose={close}
+        withCloseButton={false}
         title={
           <Link to={"/"} className="brandLink">
             <Group gap={5}>
               <Logo height={breakpointI ? 70 : 40} />
-              <Text fz={breakpointI ? "1.7em" : "1.3em"}>
+              <Text fz={breakpointI ? "1.7em" : "1.2em"}>
                 <span className="brandLabel">ChairRental</span>
                 <i>Express</i>
               </Text>

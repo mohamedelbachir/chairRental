@@ -7,6 +7,7 @@ import {
   Indicator,
   Anchor,
   Accordion,
+  Drawer,
 } from "@mantine/core";
 import { NavigationProgress } from "@mantine/nprogress";
 import { generateColors } from "@mantine/colors-generator";
@@ -54,6 +55,22 @@ const theme = createTheme({
           paddingRight: 0,
           paddingLeft: 0,
         },
+      },
+    }),
+    Drawer: Drawer.extend({
+      styles: {
+        body: {
+          paddingLeft: 10,
+        },
+        header: {
+          paddingLeft: 10,
+        },
+        inner: {
+          width: "75%",
+        },
+      },
+      defaultProps: {
+        w: "20%",
       },
     }),
     Anchor: Anchor.extend({

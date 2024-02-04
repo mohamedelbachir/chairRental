@@ -14,6 +14,7 @@ import {
   useCombobox,
   InputBase,
 } from "@mantine/core";
+import classes from "./../styles/product-card.module.css";
 import { Link } from "react-router-dom";
 import "./../styles/shopLayout.css";
 //import { cardProductType } from "../utils/cardProductType";
@@ -161,6 +162,7 @@ function FilterProductPanel() {
   const [openedAccordion, setOpenendAccordion] = useState<string[]>([]);
   return (
     <Flex
+      className={classes["product-cat-filter"]}
       direction={"column"}
       justify={"flex-start"}
       w={"25%"}

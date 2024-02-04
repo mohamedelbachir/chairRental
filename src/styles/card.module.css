@@ -12,4 +12,9 @@
   @media screen and (max-width: 535px) {
     width: 100%;
   }
+  .t-card {
+    @media screen and (max-width: 400px) {
+      display: none;
+    }
+  }
 }

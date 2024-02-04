@@ -17,7 +17,14 @@ function EventCard({ categorie, eventName, price, imgURL }: CardEventType) {
   return (
     <Card className={classes["card-element"]} withBorder>
       <Card.Section>
-        <Image src={imgURL} height={208} alt={eventName} p={13} radius={20} />
+        <Image
+          loading="lazy"
+          src={imgURL}
+          height={208}
+          alt={eventName}
+          p={13}
+          radius={20}
+        />
       </Card.Section>
       <Text size="xs">{categorie}</Text>
       <Text>{eventName}</Text>
@@ -43,7 +50,7 @@ export function EventCardBox({ categorie, datas }: EventCardBoxType) {
     <>
       {data.length > 0 ? (
         <Card
-          title={"hello"}
+          title={categorie as string}
           my={10}
           styles={{
             root: {
@@ -53,7 +60,7 @@ export function EventCardBox({ categorie, datas }: EventCardBoxType) {
             },
           }}
         >
-          <Card.Section>
+          <Card.Section withBorder>
             <Text size="md" pl={30} py={10} fw={"bold"}>
               {categorie}
             </Text>
@@ -68,10 +75,16 @@ export function EventCardBox({ categorie, datas }: EventCardBoxType) {
             //modules={[Autoplay]}
           >
             {data.map((d, i) => (
-              <SwiperSlide key={i}>
-                <Card withBorder radius={0} style={{ borderBottom: "none" }}>
+              <SwiperSlide
+                key={i}
+                style={{
+                  borderRight: "1px solid var(--mantine-color-gray-3)",
+                }}
+              >
+                <Card radius={0}>
                   <Card.Section>
                     <Image
+                      loading="lazy"
                       src={d.imgURL}
                       height={150}
                       alt={d.eventName}

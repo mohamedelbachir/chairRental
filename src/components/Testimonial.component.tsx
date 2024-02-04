@@ -62,7 +62,12 @@ function Testimonial() {
           {DATA.map((d, i) => (
             <SwiperSlide key={i}>
               <div className={classes.containSlide}>
-                <img src={d.src} alt={d.msg} className={classes.userProfile} />
+                <img
+                  loading="lazy"
+                  src={d.src}
+                  alt={d.msg}
+                  className={classes.userProfile}
+                />
                 <Text className={classes.msg}>{d.msg}</Text>
               </div>
             </SwiperSlide>

@@ -29,7 +29,7 @@ function Home() {
       <Text
         size={breakpoint ? "md" : "xl"}
         fw={"bold"}
-        mb={breakpointI ? 10 : 20}
+        mb={breakpointI ? 15 : 20}
       >
         Decouvrez des meubles adaptés à vos evenements{" "}
       </Text>
@@ -37,7 +37,7 @@ function Home() {
       <Text
         size={breakpoint ? "md" : "xl"}
         fw={"bold"}
-        my={breakpointI ? 10 : 20}
+        my={breakpointI ? 15 : 20}
       >
         The most ordered
       </Text>
@@ -45,7 +45,7 @@ function Home() {
       <Text
         size={breakpoint ? "md" : "xl"}
         fw={"bold"}
-        my={breakpointI ? 10 : 20}
+        my={breakpointI ? 15 : 20}
       >
         Our customers do the talking for us
       </Text>

@@ -18,7 +18,12 @@ const DATA: EventCard[] = [
 export function EventProductCard({ src, title }: EventCard) {
   return (
     <Flex direction={"column"}>
-      <img src={src} alt={title} className={classes.eventImage} />
+      <img
+        loading="lazy"
+        src={src}
+        alt={title}
+        className={classes.eventImage}
+      />
       <Text>{title}</Text>
     </Flex>
   );
@@ -49,7 +54,7 @@ export default function EvenProductList() {
     <>
       <Swiper
         ref={swiperRef}
-        spaceBetween={breakpoint ? 10 : 20}
+        spaceBetween={breakpoint ? 8 : 20}
         slidesPerView={2}
         className={classes.sliderCtn}
         onSlideChange={handleSlideChange}

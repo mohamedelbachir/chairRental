@@ -15,10 +15,10 @@ function NotFoundPage() {
     });
   });
   const navigate = useNavigate();
-  const breakpoint = useMediaQuery("(max-width:350px)");
+  const breakpoint = useMediaQuery("(max-width:360px)");
   return (
     <Center>
-      <Stack mt={breakpoint ? "15dvh" : undefined}>
+      <Stack mt={breakpoint ? "15vh" : undefined}>
         <NotFoundIcon />
         <Center>
           <Title order={breakpoint ? 3 : undefined}>404, Page not found</Title>

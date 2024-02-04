@@ -7,14 +7,14 @@ import { useToggle } from "@mantine/hooks";
 import GridIcon from "../assets/icons/gridIcon.svg?react";
 import ListIcon from "../assets/icons/listview.svg?react";
 import ProductCard from "./ProductCard.component";
+import classes from "./../styles/product-card.module.css";
 type Props = {
   products: cardProductType[];
-  breakpoint: boolean | undefined;
 };
 
 export type toogleViewType = "grid" | "list";
-export default function ShopList({ products, breakpoint }: Props) {
-  const breakpointII = useMediaQuery("(max-width:450px");
+export default function ShopList({ products }: Props) {
+  const breakpoint = useMediaQuery("(max-width:450px");
   const [view, toggle] = useToggle<toogleViewType>(["grid", "list"]);
   function handleSwitch(s: toogleViewType) {
     if (s !== view) {
@@ -23,39 +23,37 @@ export default function ShopList({ products, breakpoint }: Props) {
   }
 
   return (
-    <Stack w={breakpoint ? "100%" : "75%"}>
-      {!breakpoint && (
-        <Card withBorder h={68} w={"100%"}>
-          <Group justify="space-between">
-            <Text>
-              {products.length} items in <b>Mobile accessory</b>
-            </Text>
-            <ActionIcon.Group>
-              <ActionIcon
-                variant={view === "grid" ? "light" : "default"}
-                size="lg"
-                aria-label="grid"
-                onClick={() => handleSwitch("grid")}
-              >
-                <GridIcon />
-              </ActionIcon>
+    <Stack className={classes["product-list-wrapper"]}>
+      <Card withBorder h={68} w={"100%"} className={classes["card-band"]}>
+        <Group justify="space-between">
+          <Text>
+            {products.length} items in <b>Mobile accessory</b>
+          </Text>
+          <ActionIcon.Group>
+            <ActionIcon
+              variant={view === "grid" ? "light" : "default"}
+              size="lg"
+              aria-label="grid"
+              onClick={() => handleSwitch("grid")}
+            >
+              <GridIcon />
+            </ActionIcon>
 
-              <ActionIcon
-                variant={view === "list" ? "light" : "default"}
-                size="lg"
-                aria-label="list"
-                onClick={() => handleSwitch("list")}
-              >
-                <ListIcon />
-              </ActionIcon>
-            </ActionIcon.Group>
-          </Group>
-        </Card>
-      )}
+            <ActionIcon
+              variant={view === "list" ? "light" : "default"}
+              size="lg"
+              aria-label="list"
+              onClick={() => handleSwitch("list")}
+            >
+              <ListIcon />
+            </ActionIcon>
+          </ActionIcon.Group>
+        </Group>
+      </Card>
       <Flex
         justify={"space-between"}
         wrap={"wrap"}
-        gap={view === "grid" ? (breakpointII ? 5 : 10) : 9}
+        gap={view === "grid" ? (breakpoint ? 3 : 10) : 9}
         className="top-element"
       >
         {products.map((d, i) => {
@@ -63,7 +61,7 @@ export default function ShopList({ products, breakpoint }: Props) {
         })}
       </Flex>
       <Group w={"100%"} justify="flex-end">
-        <Pagination total={5} size={breakpointII ? "sm" : "md"} />
+        <Pagination total={5} size={"md"} />
       </Group>
     </Stack>
   );

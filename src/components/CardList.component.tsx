@@ -25,15 +25,15 @@ function CardElement({ Icon, title, description }: cardProps) {
         classe["card-element"] + " " + classes["card-element-proprety"]
       }
     >
-      <Flex gap={7} align={breakpointII ? "center" : "flex-start"}>
+      <Flex gap={7} align={breakpointII ? "center" : "flex-start"} px={10}>
         <Icon />
         <Flex align="flex-start" direction="column">
-          <Text fw={"bold"} className={classes.title}>
+          <Text fw={breakpoint ? "normal" : "bold"} className={classes.title}>
             {title}
           </Text>
-          {!breakpointII && (
-            <Text lineClamp={breakpoint ? 1 : 2}>{description}</Text>
-          )}
+          <Text lineClamp={breakpoint ? 1 : 2} className={classe["t-card"]}>
+            {description}
+          </Text>
         </Flex>
       </Flex>
     </Box>
@@ -48,10 +48,11 @@ function CardList() {
   return (
     <Group
       justify="space-between"
-      my={breakpoint ? 10 : 42}
+      my={breakpoint ? 15 : 42}
       w={"100%"}
       wrap="nowrap"
       className={classes["ctn-card"]}
+      gap={breakpoint ? 5 : undefined}
     >
       <CardElement
         Icon={() => (
