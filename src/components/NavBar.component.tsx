@@ -7,7 +7,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import classes from "./../styles/navbar.module.css";
 import NavBarMenu from "./NavBarMenu.component";
 import { useLocation } from "react-router-dom";
-
+import LINK from "../utils/LinkApp";
 //type Props = {}
 
 function NavBar() {
@@ -17,8 +17,8 @@ function NavBar() {
   const breakpoint = useMediaQuery("(max-width:400px)");
   const location = useLocation();
   const whiteListSearch = [
-    { link: "/", name: "home" },
-    { link: "/Shop", name: "shop" },
+    { link: LINK.HOME.path, name: "home" },
+    { link: LINK.SHOP.path, name: "shop" },
   ];
   useEffect(() => {
     const L = whiteListSearch.filter((l) => {
@@ -38,11 +38,12 @@ function NavBar() {
             hiddenFrom="xs"
             gap={0}
             justify="space-between"
+            wrap="nowrap"
           >
             <Autocomplete
               placeholder="Search"
               radius={"xl"}
-              w={breakpoint ? "85%" : "90%"}
+              w={breakpoint ? "86%" : "90%"}
               leftSection={<SearchIcon />}
             />
             <ActionIcon variant="default" radius={"lg"} size={"lg"}>

@@ -2,7 +2,7 @@
   --primary-color: #6a71f1;
   --secondary-color: #000000;
   --ternary-color: #f39090;
-  --link-color: darken(#8eb0c7, 0.3);
+  --link-color: #839fb1;
   --header-height: 70px;
   --content-color: white;
   --bg-color: #f7fafc;
@@ -14,6 +14,7 @@
   --mantine-color-gray-filled: var(--mantine-color-gray-6) !important;
   --mantine-color-orange-filled: var(--mantine-color-orange-6) !important;
   --mantine-color-green-filled: var(--mantine-color-green-6) !important;
+  --mantine-color-red-filled: var(--mantine-color-red-6) !important;
   @media only screen and (max-width: 350px) {
     --header-height: 50px !important;
   }

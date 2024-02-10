@@ -11,11 +11,18 @@ export type CardEventType = {
   eventName: string;
   price: number;
   imgURL: string;
+  style?: React.CSSProperties;
 };
 
-function EventCard({ categorie, eventName, price, imgURL }: CardEventType) {
+function EventCard({
+  style,
+  categorie,
+  eventName,
+  price,
+  imgURL,
+}: CardEventType) {
   return (
-    <Card className={classes["card-element"]} withBorder>
+    <Card className={classes["card-element"]} withBorder style={style}>
       <Card.Section>
         <Image
           loading="lazy"

@@ -1,3 +1,12 @@
+.img-grid-view {
+  height: 180px;
+}
+.img-list-view {
+  width: 150px;
+}
+.product-view-list {
+  height: 230px;
+}
 .product-list-wrapper {
   width: 75%;
   .product-view-grid {
@@ -33,6 +42,15 @@
   }
   .product-cat-filter {
     display: none;
+  }
+  .img-grid-view {
+    height: 110px;
+  }
+  .img-list-view {
+    width: 100 px;
+  }
+  .product-view-list {
+    height: fit-content;
   }
 }
 @media screen and (max-width: 450px) {

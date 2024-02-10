@@ -33,14 +33,6 @@ import { useMediaQuery } from "@mantine/hooks";
 //type Props = {};
 
 import "swiper/css";
-
-const boxStyle: MantineStyleProp = {
-  backgroundColor: "white",
-  border: "1px solid #DEE2E7",
-  padding: "10px",
-  borderRadius: "6px",
-};
-
 const boxInterStyle: MantineStyleProp = {
   border: "1px solid #DEE2E7",
   borderRadius: "6px",
@@ -110,9 +102,9 @@ export function PreviewImage({ data }: previewProps) {
         gap={26}
       >
         <Box
-          h={breakpointIII ? 230 : 380}
           w={"100%"}
           style={breakpointIII ? undefined : boxInterStyle}
+          className={classes["product-preview-img-ctn"]}
         >
           <Swiper
             ref={swiperRef}
@@ -135,7 +127,7 @@ export function PreviewImage({ data }: previewProps) {
               </SwiperSlide>
             ))}
             {breakpointIII && (
-              <>
+              <Box>
                 <ActionIcon
                   component="button"
                   size="md"
@@ -152,11 +144,6 @@ export function PreviewImage({ data }: previewProps) {
                     size="md"
                     variant="white"
                     radius={"xl"}
-                    /*styles={{
-            root: {
-              display: `${activeIndex === DATA.length - 1 ? "none" : ""}`,
-            },
-          }}*/
                     className={classes.btr}
                     onClick={() => handlePrev()}
                   >
@@ -167,18 +154,13 @@ export function PreviewImage({ data }: previewProps) {
                     size="md"
                     variant="white"
                     radius={"xl"}
-                    /*styles={{
-            root: {
-              display: `${activeIndex === 1 ? "none" : ""}`,
-            },
-          }}*/
                     className={classes.btl}
                     onClick={() => handleNext()}
                   >
                     <LeftArrow width={13} />
                   </ActionIcon>
                 </ActionIcon.Group>
-              </>
+              </Box>
             )}
           </Swiper>
         </Box>
@@ -187,11 +169,12 @@ export function PreviewImage({ data }: previewProps) {
           justify="center"
           gap={9}
           className={classes["thumbmails-ctn"]}
+          wrap="nowrap"
+          w={"100%"}
         >
           {imgURLs.map((src, index) => (
             <Box
               h={47}
-              w={70.29}
               style={{
                 ...boxInterStyle,
                 borderColor: `${
@@ -239,7 +222,7 @@ export function DetailProduct({ data }: PropsDetailsProduct) {
   ];
   return (
     <Flex direction={"column"} gap={12} className={classes["product-info"]}>
-      <Text fw={"bold"} size={breakpoint ? "md" : "1.3em"}>
+      <Text className={classes["product-name"]} fw={"bold"}>
         {data
           ? data.name
           : "Mens Long Sleeve T-shirt Cotton Base Layer Slim Muscle"}
@@ -357,10 +340,9 @@ export function QuantityProduct() {
   const breakpoint = useMediaQuery("(max-width:800px)");
   return (
     <Flex
-      className={classes["product-quantity"]}
+      className={classes["wrapper-ctn"] + " " + classes["product-quantity"]}
       direction={"column"}
       gap={5}
-      style={boxStyle}
     >
       <Group wrap="nowrap">
         <Cmflag />
@@ -464,7 +446,7 @@ export default function ViewProductComponent() {
 
       <div className="container-with-padding ">
         {!breakpointII && (
-          <Box w={"100%"} style={boxStyle}>
+          <Box w={"100%"} className={classes["wrapper-ctn"]}>
             <Tabs defaultValue="description">
               <Tabs.List>
                 <Tabs.Tab value="description">Description</Tabs.Tab>

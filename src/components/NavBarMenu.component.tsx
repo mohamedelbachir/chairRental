@@ -11,6 +11,7 @@ import Profile from "./../assets/icons/Profile.svg?react";
 import Cart from "./../assets/icons/Cart.svg?react";
 import CmFlag from "./../assets/icons/flagcm.svg?react";
 import MenuIcon from "./../assets/icons/menu.svg?react";
+import LINK from "../utils/LinkApp";
 function NavBarMenu() {
   return (
     <nav className={classes.navbar}>
@@ -67,15 +68,14 @@ function NavBarMenu() {
           >
             <ActionIcon
               component={Link}
-              to="#"
+              to={LINK.CART.path}
               size="xl"
               variant="transparent"
-              onClick={(event) => event.preventDefault()}
             >
               <Cart />
             </ActionIcon>
           </Indicator>
-          <NavLink to="/contact" className={classeHeader.linkHeader}>
+          <NavLink to={LINK.CONTACT.path} className={classeHeader.linkHeader}>
             <span className={classes.linkLabel}>Help</span>
           </NavLink>
           <LangComboBox />

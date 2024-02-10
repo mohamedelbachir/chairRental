@@ -51,6 +51,7 @@
 
 .linkHeader {
   /*font-weight: 800;*/
+  text-transform: uppercase;
   font-family: Lato, "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   text-decoration: none;
@@ -63,5 +64,5 @@
 }
 
 .linkHeader[aria-current="page"] {
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }

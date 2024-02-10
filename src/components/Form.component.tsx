@@ -14,7 +14,6 @@ import classes from "./../styles/home.module.css";
 //type Props = {};
 
 function Form() {
-  const breakpoint = useMediaQuery("(max-width: 1000px)");
   const secondbp = useMediaQuery("(max-width: 380px)");
   const [active, setActive] = useState(0);
   const nextStep = () =>
@@ -62,7 +61,7 @@ function Form() {
   });*/
   return (
     <Box className={classes.box}>
-      <form style={{ display: breakpoint ? "none" : "block" }}>
+      <form className={classes["desktop-form"]}>
         <Text fw={"bold"}>Quick Order</Text>
         <TextInput
           label="First which piece of furniture do you want today"
@@ -108,7 +107,7 @@ function Form() {
           order
         </Button>
       </form>
-      <div style={{ display: breakpoint ? "block" : "none" }}>
+      <div className={classes["mobile-form"]}>
         <Stepper
           active={active}
           styles={{
@@ -121,21 +120,20 @@ function Form() {
           }}
         >
           <Stepper.Step>
-            <Text fw={"bold"} size={secondbp ? "xs" : "sm"}>
+            <Text fw={"bold"} className={classes["mobile-form-text"]}>
               Quick Order
             </Text>
             <TextInput
               label="First which piece of furniture do you want today"
               placeholder="ex: I need chairs for a crusade"
-              size={secondbp ? "xs" : "sm"}
+              className={classes["mobile-form-text"]}
               radius={"md"}
             />
             <NumberInput
               label="what quantity"
               placeholder="ex: 200"
               hideControls
-              mt={secondbp ? "0" : "7"}
-              size={secondbp ? "xs" : "sm"}
+              className={classes["mobile-form-text"]}
               radius={"md"}
             />
           </Stepper.Step>
@@ -145,8 +143,7 @@ function Form() {
               type="date"
               label="For which period "
               placeholder="ex: 01-03/01/2023"
-              mt={secondbp ? "0" : "7"}
-              size={secondbp ? "xs" : "sm"}
+              className={classes["mobile-form-text"]}
               rightSection={<Calendar />}
               radius={"md"}
             />
@@ -155,8 +152,7 @@ function Form() {
               label="Your Phone Number "
               placeholder="ex: +237 697 00 00 00"
               radius={"md"}
-              mt={secondbp ? "0" : "7"}
-              size={secondbp ? "xs" : "sm"}
+              className={classes["mobile-form-text"]}
             />
           </Stepper.Completed>
 

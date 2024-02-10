@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import classes from "./../styles/product-card.module.css";
 ///import classes from "./../styles/product-card.module.css";
 import { toogleViewType } from "./ShopList.component";
-
+import LINK from "../utils/LinkApp";
 type Props = {
   product: cardProductType;
   view: toogleViewType;
@@ -31,21 +31,21 @@ function ProductCard({ product, view }: Props) {
           className={classes["product-view-grid"]}
           withBorder
           component={Link}
-          to={"/Shop/Detail/" + product.name}
+          to={LINK.SHOP.DETAILS.path + product.name}
           onClick={(e) => {
             e.preventDefault();
-            handleClick(`/Shop/Detail/${product.name}`, product);
+            handleClick(`${LINK.SHOP.DETAILS.path + product.name}`, product);
           }}
         >
           <Card.Section withBorder>
             <Image
               loading="lazy"
               src={product.imgURLs[0]}
-              height={breakpoint ? 110 : 180}
               alt={product.name}
               p={13}
               radius={20}
               fit="contain"
+              className={classes["img-grid-view"]}
             />
           </Card.Section>
           <Flex
@@ -78,12 +78,12 @@ function ProductCard({ product, view }: Props) {
           </Flex>
         </Card>
       ) : (
-        <Card withBorder h={breakpoint ? undefined : 230} w={"100%"}>
+        <Card withBorder className={classes["product-view-list"]} w={"100%"}>
           <Group justify="flex-start" align="flex-start" wrap="nowrap">
             <Image
               loading="lazy"
               src={product.imgURLs[0]}
-              w={breakpoint ? 100 : 150}
+              className={classes["img-list-view"]}
               height={"auto"}
               alt={product.name}
               fit="contain"
@@ -125,10 +125,13 @@ function ProductCard({ product, view }: Props) {
               </Text>
               <Link
                 style={{ fontSize: 16, fontWeight: 500 }}
-                to={"/Shop/Detail/" + product.name}
+                to={LINK.SHOP.DETAILS.path + product.name}
                 className="Link active"
                 onClick={() => {
-                  handleClick(`/Shop/Detail/${product.name}`, product);
+                  handleClick(
+                    `${LINK.SHOP.DETAILS.path + product.name}`,
+                    product
+                  );
                 }}
               >
                 View details

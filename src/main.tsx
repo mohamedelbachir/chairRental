@@ -84,6 +84,9 @@ const theme = createTheme({
       },
     }),
   },
+  breakpoints: {
+    break: "1000px",
+  },
   activeClassName: "active-element",
   primaryShade: 3,
   primaryColor: "main-color",

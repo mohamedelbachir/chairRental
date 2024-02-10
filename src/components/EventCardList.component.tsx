@@ -135,15 +135,15 @@ function EventCardList() {
             gap={breakpoint ? 10 : 20}
             mt={40}
           >
-            {eventCards.map((d, i) => {
-              return <EventCard key={i} {...d} />;
-            })}
+            {eventCards.map((d, i) => (
+              <EventCard key={i} {...d} />
+            ))}
           </Flex>
         </>
       ) : (
         <>
-          {categories.map((c) => (
-            <EventCardBox categorie={c} datas={datas} key={c} />
+          {categories.map((c, i) => (
+            <EventCardBox categorie={c} datas={datas} key={i} />
           ))}
         </>
       )}

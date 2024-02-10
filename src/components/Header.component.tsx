@@ -14,11 +14,11 @@ import classes from "../styles/header.module.css";
 import Logo from "./../assets/icons/Logoheader.svg?react";
 import Profile from "./../assets/icons/account.svg?react";
 import Cart from "./../assets/icons/cartOutline.svg?react";
-
+import LINK from "../utils/LinkApp";
 const links = [
-  { href: "/", label: "HOME" },
-  { href: "/Shop", label: "SHOP" },
-  { href: "/Contact", label: "CONTACT" },
+  { href: LINK.HOME.path, label: LINK.HOME.name },
+  { href: LINK.SHOP.path, label: LINK.SHOP.name },
+  { href: LINK.CONTACT.path, label: LINK.CONTACT.name },
 ];
 function Header() {
   const [opened, { toggle, close }] = useDisclosure(false);
@@ -94,10 +94,9 @@ function Header() {
           <Group className={classes.navLinkMobile} wrap="nowrap" gap={0}>
             <ActionIcon
               component={Link}
-              to="#"
+              to={LINK.CART.path}
               size="xl"
               variant="transparent"
-              onClick={(event) => event.preventDefault()}
             >
               <Cart />
             </ActionIcon>
