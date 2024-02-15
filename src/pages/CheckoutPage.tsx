@@ -96,9 +96,9 @@ function CheckoutPage() {
           leftSection={<ArrowLeft />}
           radius={"xl"}
           component={Link}
-          to={LINK.SHOP.path}
+          to={LINK.CART.path}
         >
-          Back to shop
+          Back to Cart
         </Button>
       </Group>
     </>

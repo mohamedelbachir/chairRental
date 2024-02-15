@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import NotFoundIcon from "./../assets/icons/404.svg?react";
 import LeftArrow from "./../assets/icons/ArrowLeft.svg?react";
@@ -8,12 +8,6 @@ import { useMediaQuery } from "@mantine/hooks";
 //type Props = {};
 
 function NotFoundPage() {
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
   const navigate = useNavigate();
   const breakpoint = useMediaQuery("(max-width:360px)");
   return (

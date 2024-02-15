@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Outlet, useLocation, NavLink } from "react-router-dom";
 import { Box, Breadcrumbs } from "@mantine/core";
 import Header from "../components/Header.component";
@@ -6,6 +6,7 @@ import NavBar from "../components/NavBar.component";
 import Footer from "../components/Footer.component";
 import classes from "./../styles/layout.module.css";
 import classe from "./../styles/common.module.css";
+import BreadCrumbsIcon from "./../assets/icons/breakcrumb-arrow.svg?react";
 //type Props = {};
 import LINK from "../utils/LinkApp";
 import "./../styles/common.css";
@@ -34,19 +35,20 @@ function Layout() {
   const { pathname } = location;
   let NavMap: { [x: string]: string } = {};
   NavMap = flattenObject(LINK);
-
+  const blackListBreakcrumb = [
+    LINK.SHOP.DETAILS.name,
+    LINK.CONTACT.name,
+    LINK.FAQ.name,
+  ];
   const [paths, setPaths] = useState<string[]>([]);
-  useEffect(() => {
+  useMemo(() => {
     const pathSegments = pathname.split("/").filter((s) => s !== "");
     const pathLink = ["/"];
     let skip = "";
     for (let i = 0; i < pathSegments.length; i++) {
       const path =
         pathLink[i] === undefined ? skip : pathLink[i] + pathSegments[i] + "/";
-      if (
-        pathSegments[i] !== LINK.SHOP.DETAILS.name &&
-        pathSegments[i] !== LINK.CONTACT.name
-      ) {
+      if (!blackListBreakcrumb.includes(pathSegments[i])) {
         pathLink.push(path);
       } else {
         skip = "/" + pathSegments.join("/");
@@ -54,7 +56,12 @@ function Layout() {
     }
     setPaths(pathLink);
   }, [pathname]);
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
   /*pathBreak[0] = "/";
   pathBreak.pop();
   const items = [
@@ -83,7 +90,11 @@ function Layout() {
       <NavBar />
       {paths.length > 1 && (
         <Box className="container-with-padding inner">
-          <Breadcrumbs separator=">" my="20px" className={classe.breadcrump}>
+          <Breadcrumbs
+            separator={<BreadCrumbsIcon />}
+            my="20px"
+            className={classe.breadcrump}
+          >
             {paths.map((c, i) => {
               return (
                 <NavLink
@@ -95,7 +106,13 @@ function Layout() {
                   end
                 >
                   {!c.includes(LINK.SHOP.DETAILS.path)
-                    ? NavMap[c] ?? LINK.NOTFOUND.name
+                    ? NavMap[c] == undefined
+                      ? location.pathname.includes(
+                          LINK.USERACCOUNT.DASHBOARD.ORDERHISTORY.path
+                        )
+                        ? LINK.USERACCOUNT.DASHBOARD.ORDERHISTORY.DETAILS.name
+                        : LINK.NOTFOUND.name
+                      : NavMap[c]
                     : LINK.SHOP.DETAILS.name}
                 </NavLink>
               );

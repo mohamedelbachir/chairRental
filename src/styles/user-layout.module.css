@@ -1,0 +1,19 @@
+.wrapper {
+  width: 100%;
+  flex-wrap: nowrap;
+  height: 100%;
+  .nav-wrapper {
+    width: 20%;
+  }
+  .content {
+    width: 78.8%;
+    min-height: 100vh;
+  }
+}
+.nav-link {
+  &[data-active="true"] {
+    path {
+      stroke: white !important;
+    }
+  }
+}

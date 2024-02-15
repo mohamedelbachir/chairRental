@@ -23,11 +23,13 @@
     }
   }
   @media screen and (max-width: 450px) {
+    .product-view-grid {
+      width: 49.3%;
+    }
   }
   @media screen and (max-width: 340px) {
     .product-view-grid {
-      width: 49%;
-      padding: 5;
+      padding: 8px;
     }
   }
   @media screen and (max-width: 285px) {

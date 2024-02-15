@@ -52,7 +52,7 @@ function CardBoxElement({ Icon, title, description, Contact }: CardBoxProps) {
 }
 function Contact() {
   return (
-    <div className="container container-with-padding">
+    <div className="w-full container-with-padding ">
       <Group justify="space-between">
         <Stack className={classes["t-wrapper"]}>
           <Title order={2} c={"var(--primary-color)"}>

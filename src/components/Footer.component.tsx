@@ -9,6 +9,7 @@ import Playstore from "./../assets/icons/getOnPlaystore.svg?react";
 import AppStore from "./../assets/icons/getOnAppStore.svg?react";
 
 import SocialFooterLink from "./SocialFooterLink.component";
+import LINK from "../utils/LinkApp";
 //type Props = {};
 
 export default function Footer() {
@@ -38,7 +39,11 @@ export default function Footer() {
             <Group justify="space-between" w={breakpoint ? "50%" : undefined}>
               <Flex direction={"column"} gap={10}>
                 <Text fw={"bold"}>About</Text>
-                <Anchor component={Link} to="/Contact" className={classes.Link}>
+                <Anchor
+                  component={Link}
+                  to={LINK.FAQ.path}
+                  className={classes.Link}
+                >
                   FAQ
                 </Anchor>
                 <Anchor component={Link} to="#" className={classes.Link}>

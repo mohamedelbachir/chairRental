@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import classes from "./../styles/home.module.css";
@@ -13,13 +13,6 @@ import Testimonial from "../components/Testimonial.component";
 function Home() {
   const breakpoint = useMediaQuery("(max-width: 725px)");
   const breakpointI = useMediaQuery("(max-width: 475px)");
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
   return (
     <div className="container-with-padding ">
       <section className={classes.hero}>

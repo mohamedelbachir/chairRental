@@ -52,11 +52,10 @@ function NavBarMenu() {
         <Group justify="space-between">
           <ActionIcon
             component={Link}
-            to="#"
+            to={LINK.USERACCOUNT.path}
             size="xl"
             variant="transparent"
             className={classes.iconMobileHide}
-            onClick={(event) => event.preventDefault()}
           >
             <Profile />
           </ActionIcon>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Group, Menu, UnstyledButton } from "@mantine/core";
 import Chevron from "./../assets/icons/Chevron.svg?react";
 import classes from "./../styles/navbar.module.css";
-import EnFlag from "./../assets/icons/flagen.svg?react";
+import EnFlag from "./../assets/icons/Flag_USA.svg?react";
 import FrFlag from "./../assets/icons/flagfr.svg?react";
 //type Props = {}
 

@@ -33,10 +33,10 @@ function Cart() {
     <>
       <Stack>
         {data.map((d, i) => (
-          <>
-            <ProductCart key={i} {...d} />
+          <Stack key={i}>
+            <ProductCart {...d} />
             <Divider />
-          </>
+          </Stack>
         ))}
       </Stack>
       <Group justify="space-between" mt={"lg"}>

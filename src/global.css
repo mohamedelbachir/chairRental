@@ -2,7 +2,7 @@
   --primary-color: #6a71f1;
   --secondary-color: #000000;
   --ternary-color: #f39090;
-  --link-color: #839fb1;
+  --link-color: #60707a;
   --header-height: 70px;
   --content-color: white;
   --bg-color: #f7fafc;
@@ -74,6 +74,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   justify-content: center;
   height: 100vh;
   height: 100dvh;
+}
+.mantine-Stepper-separator[data-active="true"] {
+  background-color: var(--mantine-color-orange-6);
+}
+.mantine-Stepper-step .mantine-Stepper-stepLabel {
+  opacity: 0.5;
+}
+.mantine-Stepper-step[data-progress="true"] .mantine-Stepper-stepLabel {
+  opacity: 1;
+}
+.mantine-Stepper-step[data-completed="true"] .mantine-Stepper-stepLabel {
+  opacity: 1;
+}
+.mantine-Stepper-separator {
+  background-color: var(--mantine-color-orange-2);
 }
 
 /*

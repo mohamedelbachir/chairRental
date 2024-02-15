@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Group } from "@mantine/core";
 
 import FilterProductPanel from "./../components/FilterProductPanel.component";
@@ -86,13 +86,6 @@ const datas: cardProductType[] = [
 ];
 
 function Shop() {
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
-
   return (
     <Group
       gap={10}
