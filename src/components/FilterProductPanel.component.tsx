@@ -17,7 +17,7 @@ import {
 import classes from "./../styles/product-card.module.css";
 import { Link } from "react-router-dom";
 import "./../styles/shopLayout.css";
-//import { cardProductType } from "../utils/cardProductType";
+//import { cartProductType } from "../utils/cartProductType";
 import Chevron from "./../assets/icons/Chevron.svg?react";
 
 const categories: string[] = ["Chair", "Table", "Tent", "Modern Chair"];

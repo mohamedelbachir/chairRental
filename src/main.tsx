@@ -6,6 +6,8 @@ import { NavigationProgress } from "@mantine/nprogress";
 import { BrowserRouter as Router } from "react-router-dom";
 import ContextProvider from "./context/context.tsx";
 import { lazy } from "react";
+import { Provider } from "react-redux";
+import { store } from "./store/store.ts";
 
 const App = lazy(() => import("./App.tsx"));
 import Loader from "./components/Loader.component.tsx";
@@ -22,9 +24,11 @@ root.render(
       <Router>
         <React.Suspense fallback={<Loader />}>
           <NavigationProgress />
-          <ContextProvider>
-            <App />
-          </ContextProvider>
+          <Provider store={store}>
+            <ContextProvider>
+              <App />
+            </ContextProvider>
+          </Provider>
         </React.Suspense>
       </Router>
     </MantineProvider>

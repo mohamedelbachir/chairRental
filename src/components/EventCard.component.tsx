@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CategorieEvent } from "../utils/CategorieEventType";
-import { Card, Image, Text, Center, Button, Group } from "@mantine/core";
+import { Card, Image, Text, Center, Button, Group, Title } from "@mantine/core";
 import RightIcon from "./../assets/icons/Right.svg?react";
 import classes from "./../styles/card.module.css";
 
 import "swiper/css";
+import { Link } from "react-router-dom";
+import LINK from "../utils/LinkApp";
 export type CardEventType = {
   categorie: CategorieEvent;
   eventName: string;
-  price: number;
+  unitPrice: number;
   imgURL: string;
   style?: React.CSSProperties;
 };
@@ -18,11 +20,17 @@ function EventCard({
   style,
   categorie,
   eventName,
-  price,
+  unitPrice,
   imgURL,
 }: CardEventType) {
   return (
-    <Card className={classes["card-element"]} withBorder style={style}>
+    <Card
+      className={classes["card-element"]}
+      withBorder
+      style={style}
+      component={Link}
+      to={LINK.SHOP.path}
+    >
       <Card.Section>
         <Image
           loading="lazy"
@@ -35,7 +43,7 @@ function EventCard({
       </Card.Section>
       <Text size="xs">{categorie}</Text>
       <Text>{eventName}</Text>
-      <Text>XAF {price}/jour</Text>
+      <Text>XAF {unitPrice}/jour</Text>
     </Card>
   );
 }
@@ -68,9 +76,9 @@ export function EventCardBox({ categorie, datas }: EventCardBoxType) {
           }}
         >
           <Card.Section withBorder>
-            <Text size="md" pl={30} py={10} fw={"bold"}>
+            <Title order={4} pl={30} py={10}>
               {categorie}
-            </Text>
+            </Title>
           </Card.Section>
           <Swiper
             spaceBetween={0}
@@ -88,7 +96,7 @@ export function EventCardBox({ categorie, datas }: EventCardBoxType) {
                   borderRight: "1px solid var(--mantine-color-gray-3)",
                 }}
               >
-                <Card radius={0}>
+                <Card radius={0} component={Link} to={LINK.SHOP.path}>
                   <Card.Section>
                     <Image
                       loading="lazy"
@@ -103,7 +111,7 @@ export function EventCardBox({ categorie, datas }: EventCardBoxType) {
                     <Text>{d.eventName}</Text>
                   </Center>
                   <Center>
-                    <Text c={"gray"}>XAF {d.price}/jour</Text>
+                    <Text c={"gray"}>XAF {d.unitPrice}/jour</Text>
                   </Center>
                 </Card>
               </SwiperSlide>
@@ -113,6 +121,8 @@ export function EventCardBox({ categorie, datas }: EventCardBoxType) {
             <Button
               variant="subtle"
               size="md"
+              component={Link}
+              to={LINK.SHOP.path}
               rightSection={
                 <RightIcon fill="var(--primary-color)" width={10} />
               }

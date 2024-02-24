@@ -68,9 +68,7 @@ function Contact() {
       </Group>
       <Center>
         <Stack align="center">
-          <Text size="xl" fw={"bold"}>
-            What can we assist you with today ?
-          </Text>
+          <Title order={3}>What can we assist you with today ?</Title>
           <Group justify="center">
             <CardElement
               Icon={() => <TruckIcon width={40} />}
@@ -93,9 +91,7 @@ function Contact() {
               href="#"
             />
           </Group>
-          <Text size="xl" fw={"bold"}>
-            Popular Topics
-          </Text>
+          <Title order={3}>Popular Topics</Title>
           <Group className={classes["t-question"]}>
             <Stack>
               <ul className={classes.list}>
@@ -137,10 +133,8 @@ function Contact() {
               </ul>
             </Stack>
           </Group>
-          <Text size="xl">Don’t find your answer</Text>
-          <Text size="xl" fw={"bold"}>
-            Contact with us
-          </Text>
+          <Text size="xl">Don’t find your answer ? </Text>
+          <Title order={3}>Contact with us</Title>
           <Group justify="center">
             <CardBoxElement
               Icon={() => <CallIcon className={classes["img-cover"]} />}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Flex, Group, MantineStyleProp } from "@mantine/core";
+import { Box, Text, Flex, Group, MantineStyleProp, Title } from "@mantine/core";
 import classes from "./../styles/cardlist.module.css";
 import classe from "./../styles/card.module.css";
 import { useMediaQuery } from "@mantine/hooks";
@@ -28,9 +28,9 @@ function CardElement({ Icon, title, description }: cardProps) {
       <Flex gap={7} align={breakpointII ? "center" : "flex-start"} px={10}>
         <Icon />
         <Flex align="flex-start" direction="column">
-          <Text fw={breakpoint ? "normal" : "bold"} className={classes.title}>
+          <Title order={breakpoint ? 5 : 4} className={classes.title}>
             {title}
-          </Text>
+          </Title>
           <Text lineClamp={breakpoint ? 1 : 2} className={classe["t-card"]}>
             {description}
           </Text>

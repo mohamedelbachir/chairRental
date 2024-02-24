@@ -3,7 +3,7 @@ import { Group } from "@mantine/core";
 
 import FilterProductPanel from "./../components/FilterProductPanel.component";
 import ShopList from "../components/ShopList.component";
-import { cardProductType } from "./../utils/cardProductType.ts";
+import { cartProductType } from "./../utils/cartProductType.ts";
 
 import PhoneImage from "./../assets/products/0fde3cb34a30e1c40080fa607437adb64caa3545.png";
 import AssetI from "./../assets/products/01ad73c0a2d288ce5bd52ddfac2945120df5102b.png";
@@ -16,68 +16,74 @@ import AssetVII from "./../assets/products/ebb1aca726e944afe4e9b344a9d08d2cdf13f
 import AssetVIII from "./../assets/products/f16c3be367d46067797d63f72c5d238bab2c834f.png";
 
 //type Props = {};
-const datas: cardProductType[] = [
+const datas: cartProductType[] = [
   {
-    price: 500,
+    id: "0",
+    unitPrice: 500,
     name: "GoPro HERO6 4K Action Camera - Black",
     shop: "Nano Shop",
     star: 3,
-    imgURLs: [PhoneImage, AssetVII],
+    images: [PhoneImage, AssetVII],
     categorie: "Electronic",
     orderNumber: 130,
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis quod illum eos dignissimos quisquam, suscipit est animi distinctio dicta quibusdam rerum quas, incidunt, repudiandae voluptates id. Qui, labore hic!",
   },
   {
-    price: 100,
+    id: "1",
+    unitPrice: 100,
     name: "GoPro HERO6 4K Action Camera - Black",
     shop: "Nano Shop",
     star: 5,
-    imgURLs: [AssetI],
+    images: [AssetI],
     categorie: "Electronic",
     orderNumber: 130,
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis quod illum eos dignissimos quisquam, suscipit est animi distinctio dicta quibusdam rerum quas, incidunt, repudiandae voluptates id. Qui, labore hic!",
   },
   {
-    price: 500,
+    id: "2",
+    unitPrice: 500,
     name: "GoPro HERO6 4K Action Camera - Black",
     shop: "Nano Shop",
     star: 5,
-    imgURLs: [AssetII, AssetVII, AssetVIII],
+    images: [AssetII, AssetVII, AssetVIII],
     categorie: "Electronic",
     orderNumber: 130,
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis quod illum eos dignissimos quisquam, suscipit est animi distinctio dicta quibusdam rerum quas, incidunt, repudiandae voluptates id. Qui, labore hic!",
   },
   {
-    price: 30,
+    id: "3",
+    unitPrice: 30,
     name: "GoPro HERO6 4K Action Camera - Black",
     shop: "Nano Shop",
     star: 1,
-    imgURLs: [AssetIII],
+    images: [AssetIII],
     categorie: "Electronic",
     orderNumber: 130,
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis quod illum eos dignissimos quisquam, suscipit est animi distinctio dicta quibusdam rerum quas, incidunt, repudiandae voluptates id. Qui, labore hic!",
   },
   {
-    price: 1000,
+    id: "4",
+    unitPrice: 1000,
     name: "GoPro HERO6 4K Action Camera - Black",
     shop: "Nano Shop",
     star: 3,
-    imgURLs: [AssetIV],
+    images: [AssetIV],
     categorie: "Electronic",
     orderNumber: 130,
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis quod illum eos dignissimos quisquam, suscipit est animi distinctio dicta quibusdam rerum quas, incidunt, repudiandae voluptates id. Qui, labore hic!",
   },
   {
-    price: 500,
+    id: "5",
+    unitPrice: 500,
     name: "GoPro HERO6 4K Action Camera - Black",
     shop: "Nano Shop",
     star: 3,
-    imgURLs: [AssetV],
+    images: [AssetV],
     categorie: "Electronic",
     orderNumber: 130,
     description:

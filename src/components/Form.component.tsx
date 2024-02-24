@@ -7,6 +7,7 @@ import {
   NumberInput,
   Stepper,
   Group,
+  Title,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import Calendar from "./../assets/icons/calendar.svg?react";
@@ -62,7 +63,7 @@ function Form() {
   return (
     <Box className={classes.box}>
       <form className={classes["desktop-form"]}>
-        <Text fw={"bold"}>Quick Order</Text>
+        <Title order={4}>Quick Order</Title>
         <TextInput
           label="First which piece of furniture do you want today"
           placeholder="ex: I need chairs for a crusade"

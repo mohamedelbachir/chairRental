@@ -1,57 +1,82 @@
-import { Group, Stack, Divider, Button } from "@mantine/core";
-import ProductCart, {
-  CartProductProps,
-} from "../components/ProductCart.component";
-import image from "./../assets/products/01ad73c0a2d288ce5bd52ddfac2945120df5102b.png";
+import {
+  Group,
+  Stack,
+  Divider,
+  Button,
+  Center,
+  Image,
+  Title,
+} from "@mantine/core";
+import ProductCart from "../components/ProductCart.component";
 import ArrowLeft from "./../assets/icons/ArrowLeft.svg?react";
+import EmptyBox from "./../assets/images/empty-box.png";
 import React from "react";
 import { Link } from "react-router-dom";
 import LINK from "../utils/LinkApp";
-const data: CartProductProps[] = [
-  {
-    id: 1,
-    description: "lol",
-    img: image,
-    name: "T-shirts with multiple colors, for men and lady",
-    numberDays: 1,
-    price: 500,
-    quantity: 3,
-  },
-  {
-    id: 2,
-    description:
-      "Size: medium, Color: blue, Material: Plastic Seller: Artel Market",
-    img: image,
-    name: "T-shirts with multiple colors, for men and lady",
-    numberDays: 1,
-    price: 500,
-    quantity: 3,
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
+import { clearCart } from "../states/product-cart/cartSlice";
+
 function Cart() {
+  const cart = useSelector((state: RootState) => state.cart.cartList);
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <>
       <Stack>
-        {data.map((d, i) => (
+        {cart.length === 0 && (
+          <>
+            <Button
+              leftSection={<ArrowLeft />}
+              radius={"xl"}
+              component={Link}
+              to={LINK.SHOP.path}
+              w={"fit-content"}
+            >
+              Back to shop
+            </Button>
+            <Center mb={"xl"} pb={"xl"}>
+              <Stack gap={"sm"}>
+                <Center>
+                  <Image src={EmptyBox} w={"20%"} fit="contain" />
+                </Center>
+                <Title ta={"center"} c={"gray"} order={3}>
+                  pannier est vide !!!
+                </Title>
+              </Stack>
+            </Center>
+          </>
+        )}
+        {cart.map((d, i) => (
           <Stack key={i}>
             <ProductCart {...d} />
             <Divider />
           </Stack>
         ))}
       </Stack>
-      <Group justify="space-between" mt={"lg"}>
-        <Button
-          leftSection={<ArrowLeft />}
-          radius={"xl"}
-          component={Link}
-          to={LINK.SHOP.path}
-        >
-          Back to shop
-        </Button>
-        <Button radius={"xl"} variant="outline">
-          Remove all
-        </Button>
-      </Group>
+      {cart.length > 0 && (
+        <Group justify="space-between" mt={"lg"}>
+          <Button
+            leftSection={<ArrowLeft />}
+            radius={"xl"}
+            component={Link}
+            to={LINK.SHOP.path}
+          >
+            Back to shop
+          </Button>
+          {cart.length > 1 && (
+            <Button
+              radius={"xl"}
+              variant="outline"
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(clearCart());
+              }}
+            >
+              Remove all
+            </Button>
+          )}
+        </Group>
+      )}
     </>
   );
 }

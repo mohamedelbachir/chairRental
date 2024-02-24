@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Group, Flex, Text, Anchor, Button } from "@mantine/core";
+import { Group, Flex, Text, Anchor, Button, Title } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import LangComboBox from "./LangComboBox.component";
 import classes from "./../styles/footer.module.css";
@@ -38,7 +38,7 @@ export default function Footer() {
             </div>
             <Group justify="space-between" w={breakpoint ? "50%" : undefined}>
               <Flex direction={"column"} gap={10}>
-                <Text fw={"bold"}>About</Text>
+                <Title order={4}>About</Title>
                 <Anchor
                   component={Link}
                   to={LINK.FAQ.path}
@@ -54,8 +54,12 @@ export default function Footer() {
                 </Anchor>
               </Flex>
               <Flex direction={"column"} gap={10}>
-                <Text fw={"bold"}>Working Together</Text>
-                <Anchor component={Link} to="#" className={classes.Link}>
+                <Title order={4}>Working Together</Title>
+                <Anchor
+                  component={Link}
+                  to={LINK.USERACCOUNT.SIGNIN.path}
+                  className={classes.Link}
+                >
                   Create an Account
                 </Anchor>
                 <Anchor component={Link} to="#" className={classes.Link}>
@@ -68,9 +72,7 @@ export default function Footer() {
             </Group>
 
             <Flex direction={"column"} gap={18}>
-              <Text fw={"bold"} size="16px">
-                Get app
-              </Text>
+              <Title order={4}>Get app</Title>
               <Button
                 component="a"
                 style={{ background: "black" }}

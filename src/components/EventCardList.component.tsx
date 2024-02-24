@@ -20,37 +20,37 @@ const datas: CardEventType[] = [
     categorie: "Chair",
     imgURL: EventImageI,
     eventName: "Chair for event",
-    price: 500,
+    unitPrice: 500,
   },
   {
     categorie: "Table",
     imgURL: EventImageII,
     eventName: "Table for event",
-    price: 500,
+    unitPrice: 500,
   },
   {
     categorie: "Tent",
     imgURL: EventImageIII,
     eventName: "Chair for event",
-    price: 500,
+    unitPrice: 500,
   },
   {
     categorie: "Chair",
     imgURL: EventImageIV,
     eventName: "Chair for event",
-    price: 500,
+    unitPrice: 500,
   },
   {
     categorie: "Tent",
     imgURL: EventImageV,
     eventName: "Tent for event",
-    price: 500,
+    unitPrice: 500,
   },
   {
     categorie: "Chair",
     imgURL: EventImageI,
     eventName: "Chair for event",
-    price: 500,
+    unitPrice: 500,
   },
 ];
 

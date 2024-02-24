@@ -8,7 +8,7 @@ type tableProps = {
   name: string;
   image: string;
   desc: string;
-  price: number;
+  unitPrice: number;
   quantity: number;
   nDay: number;
   subTotal: number;
@@ -21,7 +21,7 @@ const datas: tableProps[] = [
     desc: "Google Pixel 6 Pro - 5G Android Phone -Unlocked Smartphone with Advanced Pixel",
     image: PhoneImage,
     nDay: 10,
-    price: 500,
+    unitPrice: 500,
     quantity: 3,
     subTotal: 300,
   },
@@ -31,7 +31,7 @@ const datas: tableProps[] = [
     desc: "Google Pixel 6 Pro - 5G Android Phone -Unlocked Smartphone with Advanced Pixel",
     image: AssetI,
     nDay: 10,
-    price: 500,
+    unitPrice: 500,
     quantity: 3,
     subTotal: 300,
   },
@@ -59,7 +59,7 @@ function ProductTable() {
           </Box>
         </Group>
       </Table.Td>
-      <Table.Td>XAF {d.price}</Table.Td>
+      <Table.Td>XAF {d.unitPrice}</Table.Td>
       <Table.Td>x{d.quantity}</Table.Td>
       <Table.Td>{d.nDay} Days</Table.Td>
       <Table.Td>XAF {d.subTotal}</Table.Td>
@@ -83,7 +83,7 @@ function ProductTable() {
       >
         <Table.Tr>
           <Table.Th fw={"normal"}>Products</Table.Th>
-          <Table.Th fw={"normal"}>Price</Table.Th>
+          <Table.Th fw={"normal"}>unitPrice</Table.Th>
           <Table.Th fw={"normal"}>Quantity</Table.Th>
           <Table.Th fw={"normal"}>NOMBER OF DAYS</Table.Th>
           <Table.Th fw={"normal"}>Sub-Total</Table.Th>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Image, Text, Group, Box, Flex } from "@mantine/core";
-import { cardProductType } from "../utils/cardProductType";
+import { cartProductType } from "../utils/cartProductType";
 import { useMediaQuery } from "@mantine/hooks";
 import { Rating } from "@mantine/core";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import classes from "./../styles/product-card.module.css";
 import { toogleViewType } from "./ShopList.component";
 import LINK from "../utils/LinkApp";
 type Props = {
-  product: cardProductType;
+  product: cartProductType;
   view: toogleViewType;
 };
 
@@ -19,7 +19,7 @@ function ProductCard({ product, view }: Props) {
   const breakpointIII = useMediaQuery("(max-width:450px)");
 
   const navigate = useNavigate();
-  function handleClick(link: string, data: cardProductType) {
+  function handleClick(link: string, data: cartProductType) {
     navigate(link, {
       state: { data },
     });
@@ -31,16 +31,16 @@ function ProductCard({ product, view }: Props) {
           className={classes["product-view-grid"]}
           withBorder
           component={Link}
-          to={LINK.SHOP.DETAILS.path + product.name}
+          to={`${LINK.SHOP.DETAILS.path}\\${product.name}`}
           onClick={(e) => {
             e.preventDefault();
-            handleClick(`${LINK.SHOP.DETAILS.path + product.name}`, product);
+            handleClick(`${LINK.SHOP.DETAILS.path}\\${product.name}`, product);
           }}
         >
           <Card.Section withBorder>
             <Image
               loading="lazy"
-              src={product.imgURLs[0]}
+              src={product.images[0]}
               alt={product.name}
               p={13}
               radius={20}
@@ -58,7 +58,7 @@ function ProductCard({ product, view }: Props) {
               fw={"bold"}
               mt={breakpointII ? 0 : 17}
             >
-              XAF {product.price}/JOUR
+              XAF {product.unitPrice}/JOUR
             </Text>
             <Group gap={breakpoint ? 5 : 10} className={classes["ctn-rating"]}>
               <Rating value={product.star} fractions={2} readOnly size={"xs"} />
@@ -82,7 +82,7 @@ function ProductCard({ product, view }: Props) {
           <Group justify="flex-start" align="flex-start" wrap="nowrap">
             <Image
               loading="lazy"
-              src={product.imgURLs[0]}
+              src={product.images[0]}
               className={classes["img-list-view"]}
               height={"auto"}
               alt={product.name}
@@ -98,7 +98,7 @@ function ProductCard({ product, view }: Props) {
                 {product.name}
               </Text>
               <Text size={breakpointIII ? "sm" : "md"} fw={"bold"}>
-                XAF {product.price}/JOUR
+                XAF {product.unitPrice}/JOUR
               </Text>
               <Group wrap="nowrap" className={classes["ctn-rating-list"]}>
                 <Rating value={product.star} fractions={2} readOnly />
@@ -125,11 +125,12 @@ function ProductCard({ product, view }: Props) {
               </Text>
               <Link
                 style={{ fontSize: 16, fontWeight: 500 }}
-                to={LINK.SHOP.DETAILS.path + product.name}
                 className="Link active"
-                onClick={() => {
+                to={`${LINK.SHOP.DETAILS.path}\\${product.name}`}
+                onClick={(e) => {
+                  e.preventDefault();
                   handleClick(
-                    `${LINK.SHOP.DETAILS.path + product.name}`,
+                    `${LINK.SHOP.DETAILS.path}\\${product.name}`,
                     product
                   );
                 }}

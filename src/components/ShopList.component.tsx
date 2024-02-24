@@ -2,14 +2,14 @@ import React from "react";
 import { Flex, Card, Text, ActionIcon, Group, Stack } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { Pagination } from "@mantine/core";
-import { cardProductType } from "../utils/cardProductType";
+import { cartProductType } from "../utils/cartProductType";
 import { useToggle } from "@mantine/hooks";
 import GridIcon from "../assets/icons/gridIcon.svg?react";
 import ListIcon from "../assets/icons/listview.svg?react";
 import ProductCard from "./ProductCard.component";
 import classes from "./../styles/product-card.module.css";
 type Props = {
-  products: cardProductType[];
+  products: cartProductType[];
 };
 
 export type toogleViewType = "grid" | "list";
@@ -52,9 +52,9 @@ export default function ShopList({ products }: Props) {
       </Card>
       <Flex
         justify={"space-between"}
-        wrap={"wrap"}
-        gap={view === "grid" ? (breakpoint ? 3 : 10) : 9}
+        gap={view === "grid" ? (breakpoint ? 1 : 10) : 9}
         className="top-element"
+        wrap={"wrap"}
       >
         {products.map((d, i) => {
           return <ProductCard key={i} product={d} view={view} />;

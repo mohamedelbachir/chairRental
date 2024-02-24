@@ -12,7 +12,10 @@ import Cart from "./../assets/icons/Cart.svg?react";
 import CmFlag from "./../assets/icons/flagcm.svg?react";
 import MenuIcon from "./../assets/icons/menu.svg?react";
 import LINK from "../utils/LinkApp";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 function NavBarMenu() {
+  const cart = useSelector((state: RootState) => state.cart.cartList);
   return (
     <nav className={classes.navbar}>
       <Box className={classes.navcontent} visibleFrom="xs">
@@ -62,7 +65,7 @@ function NavBarMenu() {
           <Indicator
             size={15}
             offset={10}
-            label="8"
+            label={cart.length}
             className={classes.iconMobileHide}
           >
             <ActionIcon

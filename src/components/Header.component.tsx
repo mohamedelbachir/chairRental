@@ -8,6 +8,7 @@ import {
   Text,
   Drawer,
   Stack,
+  Indicator,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import classes from "../styles/header.module.css";
@@ -15,6 +16,8 @@ import Logo from "./../assets/icons/Logoheader.svg?react";
 import Profile from "./../assets/icons/account.svg?react";
 import Cart from "./../assets/icons/cartOutline.svg?react";
 import LINK from "../utils/LinkApp";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 const links = [
   { href: LINK.HOME.path, label: LINK.HOME.name },
   { href: LINK.SHOP.path, label: LINK.SHOP.name },
@@ -22,6 +25,7 @@ const links = [
 ];
 function Header() {
   const [opened, { toggle, close }] = useDisclosure(false);
+  const cart = useSelector((state: RootState) => state.cart.cartList);
   const location = useLocation();
 
   useEffect(() => {
@@ -92,20 +96,22 @@ function Header() {
             </Link>
           </Group>
           <Group className={classes.navLinkMobile} wrap="nowrap" gap={0}>
+            <Indicator size={15} offset={10} label={cart.length}>
+              <ActionIcon
+                component={Link}
+                to={LINK.CART.path}
+                size="xl"
+                variant="transparent"
+              >
+                <Cart />
+              </ActionIcon>
+            </Indicator>
+
             <ActionIcon
               component={Link}
-              to={LINK.CART.path}
+              to={LINK.USERACCOUNT.path}
               size="xl"
               variant="transparent"
-            >
-              <Cart />
-            </ActionIcon>
-            <ActionIcon
-              component={Link}
-              to="#"
-              size="xl"
-              variant="transparent"
-              onClick={(event) => event.preventDefault()}
             >
               <Profile />
             </ActionIcon>

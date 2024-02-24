@@ -77,7 +77,7 @@ function Setting() {
                   mt="7"
                   component="button"
                   type="button"
-                  label="Age range"
+                  label="Choix sexe"
                   pointer
                   rightSection={<Chevron />}
                   rightSectionPointerEvents="none"

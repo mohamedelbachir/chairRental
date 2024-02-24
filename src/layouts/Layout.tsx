@@ -43,11 +43,15 @@ function Layout() {
   const [paths, setPaths] = useState<string[]>([]);
   useMemo(() => {
     const pathSegments = pathname.split("/").filter((s) => s !== "");
-    const pathLink = ["/"];
+    const pathLink: string[] = ["/"];
     let skip = "";
     for (let i = 0; i < pathSegments.length; i++) {
       const path =
-        pathLink[i] === undefined ? skip : pathLink[i] + pathSegments[i] + "/";
+        pathLink[i] +
+        skip +
+        (pathLink[i]?.charAt(pathLink[i].length - 1) !== "/" ? "/" : "") +
+        pathSegments[i];
+
       if (!blackListBreakcrumb.includes(pathSegments[i])) {
         pathLink.push(path);
       } else {

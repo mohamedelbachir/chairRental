@@ -30,8 +30,18 @@
 }
 .product-cart-checkout {
   width: 20%;
+  position: sticky;
+  top: calc(var(--header-height) + 65px);
+}
+.checkout-btn {
+  background-color: var(--mantine-color-green-filled);
+  &[data-disabled="true"] {
+    color: gray;
+    background-color: lightgray;
+  }
 }
 .product-cart-img {
+  width: 80px;
   height: 75px;
 }
 .icon {

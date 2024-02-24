@@ -1,66 +1,66 @@
 const LINK = {
   HOME: {
-    shortlink: "/",
+    shortlink: "",
     path: "/",
     name: "Home",
   },
   ABOUT: {
     shortlink: "About",
-    path: "/About/",
+    path: "/About",
     name: "About",
   },
   SHOP: {
     shortlink: "Shop",
-    path: "/Shop/",
+    path: "/Shop",
     name: "Shop",
     DETAILS: {
       shortlink: "Detail",
-      path: "/Shop/Detail/",
+      path: "/Shop/Detail",
       name: "Detail",
     },
   },
   FAQ: {
     shortlink: "FAQ",
-    path: "/FAQ/",
+    path: "/FAQ",
     name: "FAQ",
   },
   CONTACT: {
     shortlink: "Contact",
-    path: "/Contact/",
+    path: "/Contact",
     name: "Contact",
   },
   CART: {
     shortlink: "ShoppingCart",
-    path: "/ShoppingCart/",
+    path: "/ShoppingCart",
     name: "Shopping Cart",
     CHECKOUT: {
       shortlink: "Checkout",
-      path: "/ShoppingCart/Checkout/",
+      path: "/ShoppingCart/Checkout",
       name: "Checkout",
     },
   },
   USERACCOUNT: {
     shortlink: "UserAccount",
-    path: "/UserAccount/",
+    path: "/UserAccount",
     name: "User Account",
     FORGETPASSWORD: {
       shortlink: "ForgetPassword",
-      path: "/UserAccount/ForgetPassword/",
+      path: "/UserAccount/ForgetPassword",
       name: "Forget Password",
     },
     RESETPASSWORD: {
       shortlink: "ResetPassword",
-      path: "/UserAccount/ResetPassword/",
+      path: "/UserAccount/ResetPassword",
       name: "Reset Password",
     },
     OTP: {
       shortlink: "Verification",
-      path: "/UserAccount/Verification/",
+      path: "/UserAccount/Verification",
       name: "Verification",
     },
     SIGNIN: {
       shortlink: "SignIn",
-      path: "/UserAccount/SignIn/",
+      path: "/UserAccount/SignIn",
       name: "Sign In",
       COMPLETION: {
         shortlink: "Profile",
@@ -70,16 +70,16 @@ const LINK = {
     },
     LOGIN: {
       shortlink: "logIn",
-      path: "/UserAccount/LogIn/",
+      path: "/UserAccount/LogIn",
       name: "Log In",
     },
     DASHBOARD: {
       shortlink: "Dashboard",
-      path: "/UserAccount/Dashboard/",
+      path: "/UserAccount/Dashboard",
       name: "Dashboard",
       ORDERHISTORY: {
         shortlink: "OrderHistory",
-        path: "/UserAccount/Dashboard/OrderHistory/",
+        path: "/UserAccount/Dashboard/OrderHistory",
         name: "Order History",
         DETAILS: {
           name: "Order Details",
@@ -87,12 +87,12 @@ const LINK = {
       },
       CART: {
         shortlink: "Cart",
-        path: "/UserAccount/Dashboard/Cart/",
+        path: "/UserAccount/Dashboard/Cart",
         name: "Shopping Cart",
       },
       SETTING: {
         shortlink: "Setting",
-        path: "/UserAccount/Dashboard/Setting/",
+        path: "/UserAccount/Dashboard/Setting",
         name: "Setting",
       },
     },

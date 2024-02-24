@@ -1,14 +1,14 @@
 import { Group, Card, Stack, Divider, Text, Button, Box } from "@mantine/core";
 import { Outlet, useLocation } from "react-router-dom";
-import { CartProductProps } from "../components/ProductCart.component";
-import image from "./../assets/products/01ad73c0a2d288ce5bd52ddfac2945120df5102b.png";
 import TruckIcon from "./../assets/icons/truck-icon.svg?react";
 import SecureIcon from "./../assets/icons/lock-icon.svg?react";
 import MessageIcon from "./../assets/icons/message-icon.svg?react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./../styles/product-cart.module.css";
 import { Link } from "react-router-dom";
 import LINK from "../utils/LinkApp";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 type cardProps = {
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   title: string;
@@ -30,31 +30,24 @@ function CardElement({ Icon, title, description }: cardProps) {
     </Group>
   );
 }
-const data: CartProductProps[] = [
-  {
-    id: 1,
-    description: "lol",
-    img: image,
-    name: "T-shirts with multiple colors, for men and lady",
-    numberDays: 1,
-    price: 500,
-    quantity: 3,
-  },
-  {
-    id: 2,
-    description:
-      "Size: medium, Color: blue, Material: Plastic Seller: Artel Market",
-    img: image,
-    name: "T-shirts with multiple colors, for men and lady",
-    numberDays: 1,
-    price: 500,
-    quantity: 3,
-  },
-];
 function CartLayout() {
+  const cart = useSelector((state: RootState) => state.cart.cartList);
   const location = useLocation();
+  const [total, setTotal] = useState(0);
+  //const [subTotal, setSubTotal] = useState(0);
+  useEffect(() => {
+    if (cart.length > 0) {
+      const totalAmount = cart.reduce((acc, data) => {
+        return acc + data.quantity! * data.unitPrice;
+      }, 0);
+      setTotal(totalAmount);
+    }
+    if (cart.length === 0) {
+      setTotal(0);
+    }
+  }, [cart]);
   return (
-    <div className="w-full container-with-padding ">
+    <div className="w-full container-with-padding">
       <Group className={classes["product-cart-wrapper"] + " top-element"}>
         <Card withBorder className={classes["product-cart-list"]}>
           <Outlet />
@@ -62,30 +55,34 @@ function CartLayout() {
         <Card withBorder className={classes["product-cart-checkout"]}>
           <Group w={"100%"} justify="space-between" gap={0}>
             <Text c={"dark"}>Subtotal:</Text>
-            <Text> XAF1403.97</Text>
+            <Text> XAF {total}</Text>
           </Group>
           <Group justify="space-between" gap={0}>
             <Text c={"dark"}>Discount:</Text>
-            <Text c={"red"}>XAF60.00</Text>
+            <Text c={"red"}>XAF 0.00</Text>
           </Group>
           <Group justify="space-between" gap={0}>
             <Text c={"dark"}>Tax:</Text>
-            <Text c={"green"}>+ XAF14.00</Text>
+            <Text c={"green"}>+ XAF 0.00</Text>
           </Group>
           <Group py={5} justify="space-between" gap={0}>
             <Text fw={"bold"}>Total :</Text>
-            <Text>XAF135700.97</Text>
+            <Text>XAF {total}</Text>
           </Group>
           <Divider pt={5} />
           <Text py={5}> </Text>
           <Button
-            bg={"green"}
             radius={"xl"}
             component={Link}
             to={LINK.CART.CHECKOUT.path}
+            disabled={cart.length < 1}
+            className={classes["checkout-btn"]}
+            onClick={(e) => {
+              cart.length < 1 ? e.preventDefault() : "";
+            }}
           >
             {location.pathname === LINK.CART.path
-              ? `Checkout (${data.length} Items)`
+              ? `Checkout (${cart.length} Items)`
               : `Place Order`}
           </Button>
         </Card>

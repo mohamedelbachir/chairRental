@@ -61,7 +61,7 @@ function TableOrder({ n }: orderProps) {
             gap={"xs"}
             align={"center"}
             component={Link}
-            to={LINK.USERACCOUNT.DASHBOARD.ORDERHISTORY.path + d.orderId}
+            to={LINK.USERACCOUNT.DASHBOARD.ORDERHISTORY.path + "/" + d.orderId}
             className="active"
           >
             <Text>View All</Text>

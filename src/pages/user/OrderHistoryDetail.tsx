@@ -1,12 +1,13 @@
 import React from "react";
 import BackIcon from "./../../assets/icons/ArrowLeft.svg?react";
 import { Text, Flex, Box, Stack, Group } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import classes from "./../../styles/dashboard.module.css";
 import StepperProducts from "../../components/StepperProducts.component";
 import LINK from "../../utils/LinkApp";
 import ProductTable from "../../components/ProductTable.component";
 function OrderHistoryDetail() {
+  const { id } = useParams();
   return (
     <Stack gap={5} className={classes["order-details-wrapper"]}>
       <Flex
@@ -23,7 +24,7 @@ function OrderHistoryDetail() {
         <Group justify="space-between">
           <Stack gap={0}>
             <Text size="lg" fw={"bold"}>
-              #96459761
+              #{id}
             </Text>
             <Text size="sm" c={"dark"}>
               <Text span>3 Products</Text>
