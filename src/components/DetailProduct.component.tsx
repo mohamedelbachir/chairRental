@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -15,13 +15,49 @@ import ShoppingIcon from "./../assets/icons/shopping_basket.svg?react";
 import classes from "./../styles/view-product.module.css";
 import { cartProductType } from "../utils/cartProductType";
 import AddButton from "./AddButton.component";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  updateQuantity,
+  updateDuration,
+  incrementQuantity,
+  dicreaseQuantity,
+  incrementDuration,
+  dicreaseDuration,
+  addToCardWithValue,
+} from "../states/product-cart/cartSlice";
+import { RootState, AppDispatch } from "../store/store";
 type PropsDetailsProduct = {
   data: cartProductType | null;
 };
 
 function DetailProduct({ data }: PropsDetailsProduct) {
   const breakpoint = useMediaQuery("(max-width:530px)");
-
+  const cart = useSelector((state: RootState) => state.cart.cartList);
+  const dispach = useDispatch<AppDispatch>();
+  const [quantity, setQuantity] = useState(1);
+  const [duration, setDuration] = useState(0);
+  const [foundItemInCart, setFoundItemInCart] = useState<
+    cartProductType | undefined
+  >(undefined);
+  useEffect(() => {
+    const item = cart.find((c) => c.id === data?.id);
+    if (item) {
+      setQuantity(item.quantity || 1);
+      setDuration(item.duration || 0);
+      setFoundItemInCart(item);
+    }
+  }, [cart]);
+  useEffect(() => {
+    /*dispach(
+      updateCart({ data: { qty: quantity, duration: duration }, id: data!.id })
+    );*/
+  }, [duration, quantity]);
+  function updateValueQuantity(v: number) {
+    dispach(updateQuantity({ value: v, id: data!.id }));
+  }
+  function updateValueDuration(v: number) {
+    dispach(updateDuration({ value: v, id: data!.id }));
+  }
   const dataTable = [
     { label: "unitPrice", value: "Negotiable" },
     { label: "Type", value: "Classic shoe" },
@@ -67,18 +103,40 @@ function DetailProduct({ data }: PropsDetailsProduct) {
           </Text>
           <Flex direction={"column"} gap={5}>
             <Text>Quantity</Text>
-            <AddButton number={1} />
+            <AddButton
+              number={quantity}
+              min={1}
+              setValue={setQuantity}
+              handleChange={updateValueQuantity}
+              handleIncrement={() => dispach(incrementQuantity(data!.id))}
+              handleDecrement={() => dispach(dicreaseQuantity(data!.id))}
+            />
             <Text>Number of Days</Text>
-            <AddButton number={0} />
+            <AddButton
+              min={0}
+              number={duration}
+              setValue={setDuration}
+              handleChange={updateValueDuration}
+              handleIncrement={() => dispach(incrementDuration(data!.id))}
+              handleDecrement={() => dispach(dicreaseDuration(data!.id))}
+            />
             <Button
-              type="submit"
               w={"100%"}
               display={"block"}
               radius={"lg"}
               mt="7"
               fz={"lg"}
+              disabled={foundItemInCart != undefined}
+              onClick={() =>
+                dispach(
+                  addToCardWithValue({
+                    prod: data!,
+                    data: { qty: quantity, duration: duration },
+                  })
+                )
+              }
             >
-              Add to cart
+              {foundItemInCart ? "Deja au Panier" : "Ajout au Panier"}
             </Button>
           </Flex>
         </>
