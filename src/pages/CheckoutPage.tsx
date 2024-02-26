@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Group,
   Button,
@@ -15,7 +15,16 @@ import CmFlag from "./../assets/icons/flagcm.svg?react";
 import Chevron from "./../assets/icons/Chevron.svg?react";
 
 import LINK from "../utils/LinkApp";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 function CheckoutPage() {
+  const cart = useSelector((state: RootState) => state.cart.cartList);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (cart.length < 1) {
+      navigate(LINK.SHOP.path, { replace: true });
+    }
+  }, [cart]);
   const towns = ["Yaounde", "Douala", "Garoua"];
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
