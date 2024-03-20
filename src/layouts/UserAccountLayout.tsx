@@ -6,7 +6,6 @@ import classes from "./../styles/user-layout.module.css";
 import LINK from "../utils/LinkApp";
 import DashboardIcon from "./../assets/icons/Stack.svg?react";
 import OrderIcon from "./../assets/icons/store-front-icon.svg?react";
-import ShopCard from "./../assets/icons/ShoppingCartSimple.svg?react";
 import GearIcon from "./../assets/icons/Gear.svg?react";
 import LogOut from "./../assets/icons/SignOut.svg?react";
 import { Context } from "../context/context";
@@ -28,7 +27,7 @@ function UserAccountLayout() {
         className={classes["nav-wrapper"]}
         radius={"xs"}
         pos={"sticky"}
-        top={"calc(var(--header-height) + 60px)"}
+        top={"calc(var(--header-height) + 5px)"}
       >
         {" "}
         <NavLink
@@ -50,15 +49,6 @@ function UserAccountLayout() {
           )}
           variant="filled"
           leftSection={<OrderIcon />}
-        />
-        <NavLink
-          component={Link}
-          className={classes["nav-link"]}
-          to={LINK.USERACCOUNT.DASHBOARD.CART.path}
-          label={LINK.USERACCOUNT.DASHBOARD.CART.name}
-          active={LINK.USERACCOUNT.DASHBOARD.CART.path === location.pathname}
-          variant="filled"
-          leftSection={<ShopCard />}
         />
         <NavLink
           component={Link}

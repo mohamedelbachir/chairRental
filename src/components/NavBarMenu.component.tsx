@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Group, Menu, Button, Box } from "@mantine/core";
 import { ActionIcon } from "@mantine/core";
 import { Indicator } from "@mantine/core";
@@ -16,8 +16,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 function NavBarMenu() {
   const cart = useSelector((state: RootState) => state.cart.cartList);
+  const location=useLocation()
+  const path=LINK.USERACCOUNT.DASHBOARD.path
+  const loc=location.pathname
   return (
-    <nav className={classes.navbar}>
+    <nav className={classes.navbar+" "+(loc.includes(path)?classes["nav-hidden"]:"")}>
       <Box className={classes.navcontent} visibleFrom="xs">
         <Menu
           width={200}

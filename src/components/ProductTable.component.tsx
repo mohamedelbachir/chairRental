@@ -59,7 +59,7 @@ function ProductTable() {
           </Box>
         </Group>
       </Table.Td>
-      <Table.Td>XAF {d.unitPrice}</Table.Td>
+      <Table.Td><Text>XAF {d.unitPrice}</Text></Table.Td>
       <Table.Td>x{d.quantity}</Table.Td>
       <Table.Td>{d.nDay} Days</Table.Td>
       <Table.Td>XAF {d.subTotal}</Table.Td>
@@ -68,7 +68,7 @@ function ProductTable() {
   return (
     <Table
       stickyHeader
-      stickyHeaderOffset={"calc(var(--header-height) + 55px)"}
+      stickyHeaderOffset={"calc(var(--header-height) + 0px)"}
       striped
       borderColor="lightgray"
     >
@@ -83,7 +83,7 @@ function ProductTable() {
       >
         <Table.Tr>
           <Table.Th fw={"normal"}>Products</Table.Th>
-          <Table.Th fw={"normal"}>unitPrice</Table.Th>
+          <Table.Th fw={"normal"}>Price</Table.Th>
           <Table.Th fw={"normal"}>Quantity</Table.Th>
           <Table.Th fw={"normal"}>NOMBER OF DAYS</Table.Th>
           <Table.Th fw={"normal"}>Sub-Total</Table.Th>

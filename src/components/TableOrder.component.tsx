@@ -74,7 +74,7 @@ function TableOrder({ n }: orderProps) {
   return (
     <Table
       stickyHeader
-      stickyHeaderOffset={"calc(var(--header-height) + 55px)"}
+      stickyHeaderOffset={"calc(var(--header-height) + 0px)"}
       striped
       borderColor="lightgray"
     >

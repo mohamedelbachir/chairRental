@@ -102,7 +102,7 @@ function Layout() {
             {paths.map((c, i) => {
               return (
                 <NavLink
-                  to={c}
+                  to={c.includes('undefined')?c.replace('/undefined','/') : c}
                   //to={!items[c].title.includes("Detail") ? c?.href : location.pathname}
                   //key={index}
                   className={classe["b-link"]}
