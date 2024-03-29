@@ -53,6 +53,7 @@ function StepperProducts() {
     >
       <Stepper.Step
         icon={<></>}
+        styles={{ stepLabel: { left: -25 } }}
         label={
           <Stack gap={5} align="center" w={"-webkit-max-content"}>
             <BookIcon />
@@ -61,7 +62,7 @@ function StepperProducts() {
         }
       />
       <Stepper.Step
-        styles={{ stepLabel: { left: -30 } }}
+        styles={{ stepLabel: { left: -32 } }}
         label={
           <Stack gap={5} align="center" w={"-webkit-max-content"}>
             <PackageIcon />
@@ -71,8 +72,9 @@ function StepperProducts() {
         icon={<Box className={classes["step-indice"]}></Box>}
       />
       <Stepper.Step
+        styles={{ stepLabel: { left: -20 } }}
         label={
-          <Stack gap={5} align="center" w={"-webkit-max-content"}>
+          <Stack gap={5} align="center" w={"-webkit-fit-content"}>
             <TruckIcon />
             <Text size="xs">On The Road</Text>
           </Stack>

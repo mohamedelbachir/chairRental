@@ -1,3 +1,8 @@
+.account-info,.box-data{
+   @media screen and (max-width:578px) {
+      width: 100%;
+    }
+}
 .order-details-wrapper {
   .icon-black-path {
     path {

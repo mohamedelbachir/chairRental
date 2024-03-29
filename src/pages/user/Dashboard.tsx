@@ -75,8 +75,8 @@ function Dashboard() {
         </Text>{" "}
         .
       </Text>
-      <Group align="flex-start">
-        <Card w={"fit-content"} withBorder>
+      <Group align="flex-start"> 
+        <Card withBorder className={classes["account-info"]}>
           <Card.Section withBorder p={"xs"}>
             <Text tt={"uppercase"}>Account Info</Text>
           </Card.Section>
@@ -108,7 +108,7 @@ function Dashboard() {
             EDIT ACCOUNT
           </Button>
         </Card>
-        <Stack gap={"xs"}>
+        <Stack gap={"xs"} className={classes["box-data"]}>
           <BoxItem
             icon={<RocketIcon />}
             bg="#EAF6FE"

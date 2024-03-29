@@ -13,7 +13,7 @@ import LINK from "../utils/LinkApp";
 
 function ForgetPassword() {
   return (
-    <Center>
+    <Center className="top-element-c">
       <Card withBorder maw={330}>
         <Text fw={"bold"} ta={"center"}>
           Forget Password

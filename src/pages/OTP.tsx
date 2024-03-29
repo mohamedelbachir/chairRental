@@ -2,7 +2,7 @@ import { Card, Center, Text, TextInput, Group, Button } from "@mantine/core";
 import React from "react";
 function OTP() {
   return (
-    <Center>
+    <Center className="top-element-c">
       <Card withBorder>
         <Text fw={"bold"} ta={"center"}>
           OTP Verification

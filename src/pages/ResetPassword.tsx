@@ -4,7 +4,7 @@ import { useDisclosure } from "@mantine/hooks";
 function ResetPassword() {
   const [visible, { toggle }] = useDisclosure(false);
   return (
-    <Center>
+    <Center className="top-element-c">
       <Card withBorder maw={330} miw={280}>
         <Text fw={"bold"} ta={"center"}>
           Reset Password

@@ -29,7 +29,7 @@ function LoginSignIn() {
   }, [location.pathname]);
 
   return (
-    <Center>
+    <Center className="top-element-c">
       <Tabs
         value={signInMethod}
         onChange={(s) => {
